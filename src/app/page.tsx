@@ -178,6 +178,11 @@ export default function Home() {
 
         <section id="pricing" className="scroll-mt-24 py-8 sm:py-12">
           <h2 className="text-3xl font-semibold tracking-tight">Pricing</h2>
+          <p className="mt-3 max-w-3xl text-sm text-zinc-400">
+            Billing rails are separate by design: <span className="text-zinc-200">Stripe plans</span> for human teams and
+            <span className="text-zinc-200"> x402 pay-per-call</span> for autonomous bot-to-bot usage. If you use an API key subscription,
+            you are <span className="text-zinc-200">not double charged</span> by x402 on the same request path.
+          </p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {pricingPlans.map((plan) => (
               <article
