@@ -1,65 +1,303 @@
-import Image from "next/image";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
+
+const pricingPlans = [
+  {
+    name: "Free",
+    price: "$0",
+    cadence: "/mo",
+    limit: "3 req/hr",
+    description: "For testing and local development",
+    button: null,
+    featured: false,
+  },
+  {
+    name: "Basic",
+    price: "$9",
+    cadence: "/mo",
+    limit: "10 req/hr",
+    description: "For shipping your first production agents",
+    button:
+      "https://king-backend.fly.dev/api/botindex/keys/register?plan=basic",
+    featured: true,
+  },
+  {
+    name: "Pro",
+    price: "$29",
+    cadence: "/mo",
+    limit: "Unlimited req/hr",
+    description: "For teams with high-throughput automation",
+    button: "https://king-backend.fly.dev/api/botindex/keys/register?plan=pro",
+    featured: false,
+  },
+];
+
+const toolCategories = [
+  {
+    name: "Sports",
+    tools: [
+      { name: "live-odds", tag: "FREE" },
+      { name: "player-props", tag: "$0.01/call" },
+      { name: "ev-calculator", tag: "FREE" },
+      { name: "injury-report", tag: "$0.01/call" },
+      { name: "line-movement", tag: "$0.01/call" },
+      { name: "roster-changes", tag: "FREE" },
+      { name: "schedule", tag: "FREE" },
+    ],
+  },
+  {
+    name: "Crypto",
+    tools: [
+      { name: "token-scan", tag: "$0.02/call" },
+      { name: "whale-watch", tag: "$0.02/call" },
+      { name: "funding-rates", tag: "FREE" },
+      { name: "dex-volume", tag: "$0.02/call" },
+      { name: "holder-analysis", tag: "$0.02/call" },
+    ],
+  },
+  {
+    name: "Hyperliquid",
+    tools: [
+      { name: "funding-arb", tag: "$0.03/call" },
+      { name: "open-interest", tag: "FREE" },
+      { name: "liquidation-map", tag: "$0.03/call" },
+      { name: "position-tracker", tag: "$0.03/call" },
+      { name: "vault-stats", tag: "FREE" },
+    ],
+  },
+  {
+    name: "Commerce",
+    tools: [
+      { name: "product-trends", tag: "FREE" },
+      { name: "deal-scanner", tag: "$0.01/call" },
+      { name: "price-tracker", tag: "$0.01/call" },
+    ],
+  },
+  {
+    name: "Solana",
+    tools: [
+      { name: "mint-monitor", tag: "$0.02/call" },
+      { name: "whale-tracker", tag: "$0.02/call" },
+    ],
+  },
+];
+
+const links = [
+  {
+    title: "npm",
+    href: "https://www.npmjs.com/package/botindex-mcp-server",
+    description: "Install package and view versions.",
+  },
+  {
+    title: "GitHub",
+    href: "https://github.com/Cyberweasel777/botindex-mcp",
+    description: "Source code, issues, and examples.",
+  },
+  {
+    title: "Smithery",
+    href: "https://smithery.ai/server/cyberweasel777/botindex-mcp-server",
+    description: "Server profile and registry listing.",
+  },
+  {
+    title: "Anthropic Registry",
+    href: "https://github.com/anthropics/anthropic-cookbook/tree/main/misc/mcp_registry",
+    description: "Official MCP registry reference.",
+  },
+];
+
+const mcpConfig = `{
+  "mcpServers": {
+    "botindex": {
+      "command": "npx",
+      "args": ["-y", "botindex-mcp"],
+      "env": {
+        "BOTINDEX_API_KEY": "your_api_key"
+      }
+    }
+  }
+}`;
+
+const curlExample = `curl -X POST \\
+  "https://king-backend.fly.dev/api/botindex/keys/register?plan=basic"`;
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div
+      className={`${inter.className} min-h-screen bg-[#0a0a0a] text-zinc-100`}
+    >
+      <header className="sticky top-0 z-30 border-b border-zinc-800/80 bg-[#0a0a0a]/90 backdrop-blur">
+        <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <a href="#top" className="text-lg font-semibold tracking-tight">
+            BotIndex
+          </a>
+          <div className="flex items-center gap-4 text-sm text-zinc-300 sm:gap-6">
+            <a href="#pricing" className="transition hover:text-white">
+              Pricing
+            </a>
+            <a href="#tools" className="transition hover:text-white">
+              Tools
+            </a>
+            <a href="#quick-start" className="transition hover:text-white">
+              Quick Start
+            </a>
+            <a
+              href="https://smithery.ai/server/cyberweasel777/botindex-mcp-server"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-white"
+            >
+              Smithery
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section className="py-20 sm:py-28">
+          <h1 className="text-5xl font-semibold tracking-tight sm:text-7xl">
+            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
+              BotIndex
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-5 max-w-2xl text-xl text-zinc-300 sm:text-2xl">
+            22 AI agent tools. One MCP server.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className="mt-8 inline-flex items-center rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3">
+            <code className="text-sm text-zinc-100 sm:text-base">
+              npx -y botindex-mcp
+            </code>
+          </div>
+        </section>
+
+        <section id="pricing" className="scroll-mt-24 py-8 sm:py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">Pricing</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-3">
+            {pricingPlans.map((plan) => (
+              <article
+                key={plan.name}
+                className={`rounded-2xl border p-6 ${
+                  plan.featured
+                    ? "border-cyan-400 bg-zinc-900/90 shadow-[0_0_0_1px_rgba(34,211,238,0.35)]"
+                    : "border-zinc-800 bg-zinc-900/60"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xl font-semibold">{plan.name}</h3>
+                  {plan.featured ? (
+                    <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-xs font-medium text-cyan-300">
+                      Featured
+                    </span>
+                  ) : null}
+                </div>
+                <p className="mt-4 text-3xl font-semibold">
+                  {plan.price}
+                  <span className="text-base font-medium text-zinc-400">
+                    {plan.cadence}
+                  </span>
+                </p>
+                <p className="mt-3 text-zinc-300">{plan.limit}</p>
+                <p className="mt-2 text-sm text-zinc-400">{plan.description}</p>
+                {plan.button ? (
+                  <a
+                    className="mt-6 inline-flex rounded-lg bg-white px-4 py-2 text-sm font-medium text-black transition hover:bg-zinc-200"
+                    href={plan.button}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get {plan.name}
+                  </a>
+                ) : (
+                  <p className="mt-6 text-sm text-zinc-500">
+                    Included without signup
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="tools" className="scroll-mt-24 py-8 sm:py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">Tools</h2>
+          <div className="mt-8 grid gap-6 lg:grid-cols-2">
+            {toolCategories.map((category) => (
+              <article
+                key={category.name}
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5"
+              >
+                <h3 className="text-lg font-semibold">{category.name}</h3>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {category.tools.map((tool) => (
+                    <div
+                      key={tool.name}
+                      className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-950 px-3 py-1.5 text-sm"
+                    >
+                      <span className="text-zinc-100">{tool.name}</span>
+                      <span
+                        className={`rounded-full px-2 py-0.5 text-xs ${
+                          tool.tag === "FREE"
+                            ? "bg-emerald-400/15 text-emerald-300"
+                            : "bg-amber-400/15 text-amber-300"
+                        }`}
+                      >
+                        {tool.tag}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="quick-start" className="scroll-mt-24 py-8 sm:py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">Quick Start</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
+              <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-400">
+                MCP Config
+              </h3>
+              <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
+                <code>{mcpConfig}</code>
+              </pre>
+            </article>
+            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
+              <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-400">
+                Register Key
+              </h3>
+              <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
+                <code>{curlExample}</code>
+              </pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="links" className="scroll-mt-24 py-8 sm:py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">Links</h2>
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {links.map((link) => (
+              <a
+                key={link.title}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
+              >
+                <h3 className="text-lg font-semibold">{link.title}</h3>
+                <p className="mt-2 text-sm text-zinc-400">{link.description}</p>
+                <p className="mt-3 text-sm text-cyan-300">{link.href}</p>
+              </a>
+            ))}
+          </div>
+        </section>
       </main>
+
+      <footer className="border-t border-zinc-800/80 py-8">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 text-sm text-zinc-400 sm:px-6 lg:px-8">
+          <p>Built for agents. Verified by cryptography.</p>
+          <p>BotIndex 2026</p>
+        </div>
+      </footer>
     </div>
   );
 }
