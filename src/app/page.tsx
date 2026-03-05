@@ -19,7 +19,7 @@ const pricingPlans = [
     limit: "10 req/hr",
     description: "For shipping your first production agents",
     button:
-      "https://king-backend.fly.dev/api/botindex/keys/register?plan=basic",
+      "https://api.botindex.dev/api/botindex/keys/register?plan=basic",
     featured: true,
   },
   {
@@ -28,7 +28,7 @@ const pricingPlans = [
     cadence: "/mo",
     limit: "Unlimited req/hr",
     description: "For teams with high-throughput automation",
-    button: "https://king-backend.fly.dev/api/botindex/keys/register?plan=pro",
+    button: "https://api.botindex.dev/api/botindex/keys/register?plan=pro",
     featured: false,
   },
 ];
@@ -64,6 +64,7 @@ const toolCategories = [
       { name: "liquidation-map", tag: "$0.03/call" },
       { name: "position-tracker", tag: "$0.03/call" },
       { name: "vault-stats", tag: "FREE" },
+      { name: "hip6-launch-candidates", tag: "$0.01/call" },
     ],
   },
   {
@@ -118,8 +119,8 @@ const mcpConfig = `{
   }
 }`;
 
-const curlExample = `curl -X POST \\
-  "https://king-backend.fly.dev/api/botindex/keys/register?plan=basic"`;
+const curlExample = `curl -X GET \\
+  "https://api.botindex.dev/api/botindex/keys/register?plan=basic"`;
 
 export default function Home() {
   return (
@@ -162,6 +163,9 @@ export default function Home() {
           </h1>
           <p className="mt-5 max-w-2xl text-xl text-zinc-300 sm:text-2xl">
             22 AI agent tools. One MCP server.
+          </p>
+          <p className="mt-3 text-sm font-medium uppercase tracking-wide text-cyan-300">
+            New: Hyperliquid HIP-6 launch intelligence endpoints live
           </p>
           <div className="mt-8 inline-flex items-center rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3">
             <code className="text-sm text-zinc-100 sm:text-base">
