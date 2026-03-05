@@ -64,6 +64,8 @@ const toolCategories = [
       { name: "liquidation-map", tag: "$0.03/call" },
       { name: "position-tracker", tag: "$0.03/call" },
       { name: "vault-stats", tag: "FREE" },
+      { name: "hip6-feed-history", tag: "FREE" },
+      { name: "hip6-alert-scores", tag: "FREE" },
       { name: "hip6-launch-candidates", tag: "$0.01/call" },
     ],
   },
