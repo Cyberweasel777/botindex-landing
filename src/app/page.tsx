@@ -169,6 +169,9 @@ export default function Home() {
           <p className="mt-3 text-sm font-medium uppercase tracking-wide text-cyan-300">
             New: Hyperliquid HIP-6 launch intelligence endpoints live
           </p>
+          <p className="mt-2 max-w-2xl text-sm text-zinc-400">
+            Positioned for the agent skills ecosystem with AAR trust-layer receipts on BotIndex API responses.
+          </p>
           <div className="mt-8 inline-flex items-center rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3">
             <code className="text-sm text-zinc-100 sm:text-base">
               npx -y botindex-mcp
