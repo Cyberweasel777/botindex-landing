@@ -88,6 +88,11 @@ const toolCategories = [
 
 const links = [
   {
+    title: "AAR Trust Layer",
+    href: "https://aar.botindex.dev",
+    description: "Open standard for verifiable AI agent actions. Ed25519-signed receipts.",
+  },
+  {
     title: "npm",
     href: "https://www.npmjs.com/package/botindex-mcp-server",
     description: "Install package and view versions.",
@@ -164,18 +169,49 @@ export default function Home() {
             </span>
           </h1>
           <p className="mt-5 max-w-2xl text-xl text-zinc-300 sm:text-2xl">
-            22 AI agent tools. One MCP server.
+            The first verifiable agent API.
           </p>
-          <p className="mt-3 text-sm font-medium uppercase tracking-wide text-cyan-300">
-            New: Hyperliquid HIP-6 launch intelligence endpoints live
+          <p className="mt-3 max-w-2xl text-base text-zinc-400">
+            Every response is cryptographically signed with an{" "}
+            <a href="https://aar.botindex.dev" target="_blank" rel="noopener noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200">
+              Agent Action Receipt
+            </a>
+            . Your agent can prove what it did, what data it received, and that nothing was tampered with.
           </p>
-          <p className="mt-2 max-w-2xl text-sm text-zinc-400">
-            Positioned for the agent skills ecosystem with AAR trust-layer receipts on BotIndex API responses.
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-3 max-w-2xl">
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-emerald-300">Ed25519 Signed</p>
+              <p className="mt-1 text-sm text-zinc-400">Every response carries a cryptographic receipt</p>
+            </div>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-cyan-300">22 Agent Tools</p>
+              <p className="mt-1 text-sm text-zinc-400">Sports, crypto, Hyperliquid, commerce intelligence</p>
+            </div>
+            <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
+              <p className="text-xs font-medium uppercase tracking-wide text-amber-300">x402 + Stripe</p>
+              <p className="mt-1 text-sm text-zinc-400">Pay per call with USDC or subscribe monthly</p>
+            </div>
+          </div>
+
+          <p className="mt-6 text-sm font-medium uppercase tracking-wide text-cyan-300">
+            Compatible with Mastercard Verifiable Intent · Coinbase x402 · Aztec ZK
           </p>
-          <div className="mt-8 inline-flex items-center rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3">
-            <code className="text-sm text-zinc-100 sm:text-base">
-              npx -y botindex-mcp
-            </code>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <div className="inline-flex items-center rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3">
+              <code className="text-sm text-zinc-100 sm:text-base">
+                npx -y botindex-mcp
+              </code>
+            </div>
+            <a
+              href="https://aar.botindex.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-3 text-sm font-medium text-cyan-300 transition hover:bg-cyan-400/20"
+            >
+              Learn about AAR →
+            </a>
           </div>
         </section>
 
@@ -308,7 +344,7 @@ export default function Home() {
 
       <footer className="border-t border-zinc-800/80 py-8">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 text-sm text-zinc-400 sm:px-6 lg:px-8">
-          <p>Built for agents. Verified by cryptography.</p>
+          <p>Built for agents. Verified by cryptography. Every action receipted.</p>
           <p>BotIndex 2026</p>
         </div>
       </footer>
