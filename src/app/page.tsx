@@ -9,7 +9,8 @@ const pricingPlans = [
     cadence: "/mo",
     limit: "3 req/hr",
     description: "For testing and local development",
-    button: null,
+    button:
+      "https://api.botindex.dev/api/botindex/keys/register?plan=free",
     featured: false,
   },
   {
@@ -258,9 +259,14 @@ export default function Home() {
                     Get {plan.name}
                   </a>
                 ) : (
-                  <p className="mt-6 text-sm text-zinc-500">
-                    Included without signup
-                  </p>
+                  <a
+                    className="mt-6 inline-flex rounded-lg border border-zinc-600 bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-100 transition hover:bg-zinc-700"
+                    href={plan.button}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get Free Key
+                  </a>
                 )}
               </article>
             ))}
