@@ -85,6 +85,22 @@ const toolCategories = [
       { name: "whale-tracker", tag: "$0.02/call" },
     ],
   },
+  {
+    name: "Doppler",
+    tools: [
+      { name: "launches", tag: "$0.01/call" },
+      { name: "score", tag: "$0.02/call" },
+      { name: "trending", tag: "$0.01/call" },
+    ],
+  },
+  {
+    name: "Trust Services",
+    tools: [
+      { name: "aar-sign", tag: "$0.001/call" },
+      { name: "scc-anchor", tag: "$0.01/call" },
+      { name: "verify", tag: "FREE" },
+    ],
+  },
 ];
 
 const links = [
@@ -92,6 +108,11 @@ const links = [
     title: "AAR Trust Layer",
     href: "https://aar.botindex.dev",
     description: "Open standard for verifiable AI agent actions. Ed25519-signed receipts.",
+  },
+  {
+    title: "Trust Verification Portal",
+    href: "https://api.botindex.dev/verify",
+    description: "Verify any AAR receipt or SCC chain. Paste a receipt, get proof.",
   },
   {
     title: "npm",
