@@ -94,6 +94,14 @@ const toolCategories = [
     ],
   },
   {
+    name: "Pump.fun",
+    tools: [
+      { name: "graduating", tag: "$0.01/call" },
+      { name: "graduated", tag: "$0.02/call" },
+      { name: "rug-score", tag: "$0.02/call" },
+    ],
+  },
+  {
     name: "Trust Services",
     tools: [
       { name: "aar-sign", tag: "$0.001/call" },
