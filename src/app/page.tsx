@@ -55,6 +55,7 @@ const toolCategories = [
       { name: "funding-rates", tag: "FREE" },
       { name: "dex-volume", tag: "$0.02/call" },
       { name: "holder-analysis", tag: "$0.02/call" },
+      { name: "intel", tag: "$0.05/call ★" },
     ],
   },
   {
@@ -68,6 +69,7 @@ const toolCategories = [
       { name: "hip6-feed-history", tag: "FREE" },
       { name: "hip6-alert-scores", tag: "FREE" },
       { name: "hip6-launch-candidates", tag: "$0.01/call" },
+      { name: "intel", tag: "$0.05/call ★" },
     ],
   },
   {
@@ -91,6 +93,7 @@ const toolCategories = [
       { name: "launches", tag: "$0.01/call" },
       { name: "score", tag: "$0.02/call" },
       { name: "trending", tag: "$0.01/call" },
+      { name: "intel", tag: "$0.05/call ★" },
     ],
   },
   {
@@ -99,6 +102,7 @@ const toolCategories = [
       { name: "trending-coins", tag: "FREE" },
       { name: "attention-momentum", tag: "$0.02/call" },
       { name: "creator-scores", tag: "$0.02/call" },
+      { name: "intel", tag: "$0.05/call ★" },
     ],
   },
   {
