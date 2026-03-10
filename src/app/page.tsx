@@ -7,8 +7,8 @@ const pricingPlans = [
     name: "Free",
     price: "$0",
     cadence: "/mo",
-    limit: "3 req/hr",
-    description: "For testing and local development",
+    limit: "100 req/day",
+    description: "For building and testing your first agents",
     button:
       "https://api.botindex.dev/api/botindex/keys/register?plan=free",
     featured: false,
@@ -17,8 +17,8 @@ const pricingPlans = [
     name: "Basic",
     price: "$9",
     cadence: "/mo",
-    limit: "10 req/hr",
-    description: "For shipping your first production agents",
+    limit: "500 req/day",
+    description: "For shipping production agents",
     button:
       "https://api.botindex.dev/api/botindex/keys/register?plan=basic",
     featured: true,
@@ -27,7 +27,7 @@ const pricingPlans = [
     name: "Pro",
     price: "$29",
     cadence: "/mo",
-    limit: "Unlimited req/hr",
+    limit: "Unlimited",
     description: "For teams with high-throughput automation",
     button: "https://api.botindex.dev/api/botindex/keys/register?plan=pro",
     featured: false,
@@ -199,6 +199,12 @@ export default function Home() {
             >
               Smithery
             </a>
+            <a
+              href="https://api.botindex.dev/api/botindex/keys/connect"
+              className="rounded-md border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-cyan-300 transition hover:bg-cyan-400/20"
+            >
+              Connect Wallet
+            </a>
           </div>
         </nav>
       </header>
@@ -311,6 +317,26 @@ export default function Home() {
                 )}
               </article>
             ))}
+          </div>
+        </section>
+
+        <section className="py-8 sm:py-12">
+          <div className="rounded-2xl border border-cyan-400/30 bg-gradient-to-r from-cyan-400/5 to-emerald-400/5 p-6 sm:p-8">
+            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h3 className="text-xl font-semibold text-white">Pay with Crypto</h3>
+                <p className="mt-1 max-w-lg text-sm text-zinc-400">
+                  Connect your wallet for x402 pay-per-call payments. No subscription required.
+                  10% cheaper than Stripe. Verifiable on-chain receipts for every call.
+                </p>
+              </div>
+              <a
+                href="https://api.botindex.dev/api/botindex/keys/connect"
+                className="shrink-0 rounded-lg border border-cyan-400/40 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400/20"
+              >
+                Connect Wallet →
+              </a>
+            </div>
           </div>
         </section>
 
