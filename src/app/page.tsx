@@ -94,6 +94,14 @@ const toolCategories = [
     ],
   },
   {
+    name: "Zora",
+    tools: [
+      { name: "trending-coins", tag: "FREE" },
+      { name: "attention-momentum", tag: "$0.02/call" },
+      { name: "creator-scores", tag: "$0.02/call" },
+    ],
+  },
+  {
     name: "Pump.fun",
     tools: [
       { name: "graduating", tag: "$0.01/call" },
