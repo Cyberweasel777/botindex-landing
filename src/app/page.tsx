@@ -131,7 +131,7 @@ const links = [
   },
   {
     title: "Trust Verification Portal",
-    href: "https://api.botindex.dev/verify",
+    href: "https://api.botindex.dev/api/botindex/trust/verify",
     description: "Verify any AAR receipt or SCC chain. Paste a receipt, get proof.",
   },
   {
