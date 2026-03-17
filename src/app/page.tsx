@@ -29,7 +29,7 @@ const pricingPlans = [
     cadence: "",
     limit: "Unlimited",
     description: "For teams with high-throughput automation",
-    button: "mailto:aglazfl@gmail.com?subject=BotIndex%20Enterprise",
+    button: "https://api.botindex.dev/api/botindex/contact",
     featured: false,
   },
 ];
