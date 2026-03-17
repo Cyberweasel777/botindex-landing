@@ -7,29 +7,29 @@ const pricingPlans = [
     name: "Free",
     price: "$0",
     cadence: "/mo",
-    limit: "100 req/day",
+    limit: "10 req/day",
     description: "For building and testing your first agents",
     button:
       "https://api.botindex.dev/api/botindex/keys/register?plan=free",
     featured: false,
   },
   {
-    name: "Basic",
-    price: "$9",
+    name: "Pro",
+    price: "$9.99",
     cadence: "/mo",
     limit: "500 req/day",
     description: "For shipping production agents",
     button:
-      "https://api.botindex.dev/api/botindex/keys/register?plan=basic",
+      "https://api.botindex.dev/api/botindex/keys/register?plan=pro",
     featured: true,
   },
   {
-    name: "Pro",
-    price: "$29",
-    cadence: "/mo",
+    name: "Enterprise",
+    price: "Custom",
+    cadence: "",
     limit: "Unlimited",
     description: "For teams with high-throughput automation",
-    button: "https://api.botindex.dev/api/botindex/keys/register?plan=pro",
+    button: "mailto:aglazfl@gmail.com?subject=BotIndex%20Enterprise",
     featured: false,
   },
 ];
@@ -169,7 +169,7 @@ const mcpConfig = `{
 }`;
 
 const curlExample = `curl -X GET \\
-  "https://api.botindex.dev/api/botindex/keys/register?plan=basic"`;
+  "https://api.botindex.dev/api/botindex/keys/register?plan=free&email=you@example.com"`;
 
 export default function Home() {
   return (
