@@ -1,4 +1,5 @@
 import { Inter } from "next/font/google";
+import GALink from "./ga-link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -159,20 +160,24 @@ export default function Home() {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <a
+            <GALink
               href={`${API_BASE}/keys/register?plan=pro`}
               className="rounded-xl bg-white px-6 py-3 text-base font-semibold text-black transition hover:bg-zinc-200"
+              event="cta_hero_pro"
+              label="hero_start_pro"
             >
               Start with Pro — $9.99/mo
-            </a>
-            <a
+            </GALink>
+            <GALink
               href={`${API_BASE}/sentinel/track-record`}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-zinc-600 bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition hover:bg-zinc-800"
+              event="cta_hero_track_record"
+              label="hero_view_track_record"
             >
               View Track Record →
-            </a>
+            </GALink>
           </div>
 
           {/* Proof points */}
@@ -273,14 +278,16 @@ export default function Home() {
               Resolutions checked at 24h, 72h, and 7 days. No cherrypicking. No
               hindsight. Just math.
             </p>
-            <a
+            <GALink
               href={`${API_BASE}/sentinel/track-record`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex rounded-xl bg-emerald-500/20 border border-emerald-500/30 px-6 py-3 text-base font-semibold text-emerald-300 transition hover:bg-emerald-500/30"
+              event="cta_track_record"
+              label="track_record_section"
             >
               View Live Track Record →
-            </a>
+            </GALink>
             <p className="mt-4 text-xs text-zinc-600">
               Data collection started March 2026. Accuracy improves with time.
             </p>
@@ -331,7 +338,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <a
+                <GALink
                   className={`mt-6 inline-flex w-full justify-center rounded-lg px-4 py-2.5 text-sm font-medium transition ${
                     plan.featured
                       ? "bg-white text-black hover:bg-zinc-200"
@@ -340,9 +347,11 @@ export default function Home() {
                   href={plan.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  event={`cta_pricing_${plan.name.toLowerCase().replace(/\s+/g, "_")}`}
+                  label={`pricing_${plan.name.toLowerCase()}`}
                 >
                   {plan.cta}
-                </a>
+                </GALink>
               </article>
             ))}
           </div>

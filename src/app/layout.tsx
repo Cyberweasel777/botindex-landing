@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BotIndex",
-  description: "22 AI agent tools. One MCP server.",
+  title: "BotIndex — Crypto Market Intelligence",
+  description:
+    "Predictive crypto intelligence. Whale divergence, convergence scoring, network momentum. Verifiable track record. Not data — insight.",
 };
 
 export default function RootLayout({
@@ -13,6 +15,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JXV4L9GJL6"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JXV4L9GJL6');
+          `}
+        </Script>
+      </head>
       <body className="antialiased">
         {children}
         {/* Landing page beacon — tracks pageviews via king-backend hit counter */}
