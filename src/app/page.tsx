@@ -26,9 +26,9 @@ const intelligenceFeatures = [
   },
   {
     icon: "🔮",
-    name: "Predictive Signals",
+    name: "Synthesized Briefs",
     description:
-      "DeepSeek-synthesized market intelligence with verifiable accuracy. Every prediction logged with entry price. Track record published daily.",
+      "DeepSeek-synthesized intelligence briefs every 15 minutes. What's moving, why it's moving, and what to watch. Every signal logged with timestamps.",
   },
   {
     icon: "⚡",
@@ -81,14 +81,14 @@ const pricingPlans = [
     name: "Sentinel",
     price: "$49.99",
     cadence: "/mo",
-    description: "Predictive signals with proof. See what's next.",
+    description: "Full intelligence pipeline. Delivered to you.",
     features: [
       "Unlimited requests",
       "Everything in Pro",
-      "Predictive signals (verifiable accuracy)",
+      "Real-time Telegram alerts",
       "Query surge intelligence",
       "Whale divergence alerts",
-      "Personal Telegram alert feed",
+      "Full synthesized briefs every 15 min",
       "Priority signal delivery",
     ],
     cta: "Get Sentinel",
@@ -123,7 +123,7 @@ export default function Home() {
               Pricing
             </a>
             <a href="#track-record" className="transition hover:text-white">
-              Track Record
+              Transparency
             </a>
             <a
               href={`${API_BASE}/keys/register?plan=pro`}
@@ -143,20 +143,20 @@ export default function Home() {
           </p>
           <h1 className="mt-4 text-5xl font-semibold tracking-tight sm:text-7xl">
             <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
-              See the move
+              All the intelligence.
             </span>
             <br />
-            <span className="text-white">before it happens.</span>
+            <span className="text-white">None of the noise.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-xl text-zinc-300">
-            BotIndex synthesizes whale positions, developer activity, and
-            behavioral demand signals into predictive intelligence. Not data —
-            insight.
+            BotIndex reads whale positions, developer activity, funding rates,
+            and 19K+ daily demand signals — so you don't have to. One
+            synthesized brief instead of 50 tabs.
           </p>
           <p className="mt-3 max-w-2xl text-base text-zinc-500">
-            19,000+ daily API requests tell us what the market is looking for.
-            Whale positions tell us where money is moving. Developer velocity
-            tells us what's being built. We connect the dots.
+            Stop scrolling CoinGecko, DexScreener, and Crypto Twitter for
+            hours. Get a 15-minute intelligence brief that covers what moved,
+            why it moved, and what to watch next.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
@@ -169,14 +169,14 @@ export default function Home() {
               Start with Pro — $9.99/mo
             </GALink>
             <GALink
-              href={`${API_BASE}/sentinel/track-record`}
+              href="https://t.me/BotIndexHacks_Bot"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-zinc-600 bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition hover:bg-zinc-800"
-              event="cta_hero_track_record"
-              label="hero_view_track_record"
+              event="cta_hero_telegram"
+              label="hero_telegram_bot"
             >
-              View Track Record →
+              Get Alerts on Telegram →
             </GALink>
           </div>
 
@@ -195,13 +195,13 @@ export default function Home() {
         <section className="py-12">
           <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-8">
             <h2 className="text-2xl font-semibold text-amber-300">
-              Raw data is a commodity.
+              You're spending 2 hours a day on data you could read in 2 minutes.
             </h2>
             <p className="mt-3 max-w-3xl text-zinc-400">
-              CoinGecko, DexScreener, DefiLlama — everyone has the same data.
-              The edge isn't in the data. It's in knowing what the data means
-              <em> before </em> the market prices it in. BotIndex is the
-              intelligence layer that sits on top.
+              CoinGecko. DexScreener. DefiLlama. Hyperliquid. Crypto Twitter.
+              GitHub. Funding rate dashboards. Fear & Greed index. You're checking
+              all of them, every day, piecing together the same picture BotIndex
+              builds automatically every 15 minutes.
             </p>
           </div>
         </section>
@@ -259,9 +259,8 @@ export default function Home() {
                 3. Deliver
               </p>
               <p className="mt-3 text-sm text-zinc-400">
-                Signals delivered via API, Telegram alerts, or dashboard. Every
-                prediction logged with entry price for verifiable accuracy.
-                Track record updated daily.
+                Intelligence delivered via API or straight to your Telegram.
+                No dashboards to check. No tabs to monitor. It comes to you.
               </p>
             </div>
           </div>
@@ -271,12 +270,12 @@ export default function Home() {
         <section id="track-record" className="scroll-mt-24 py-12">
           <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center">
             <h2 className="text-3xl font-semibold text-emerald-300">
-              Verifiable Track Record
+              Transparent by Default
             </h2>
             <p className="mt-3 mx-auto max-w-2xl text-zinc-400">
-              Every prediction is logged with a timestamped entry price.
-              Resolutions checked at 24h, 72h, and 7 days. No cherrypicking. No
-              hindsight. Just math.
+              Every signal is logged with a timestamp and entry price. We publish
+              what we said and when we said it. Resolutions checked at 24h, 72h,
+              and 7 days. No cherrypicking. No hindsight.
             </p>
             <GALink
               href={`${API_BASE}/sentinel/track-record`}
@@ -298,7 +297,7 @@ export default function Home() {
         <section id="pricing" className="scroll-mt-24 py-12">
           <h2 className="text-3xl font-semibold tracking-tight">Pricing</h2>
           <p className="mt-3 text-zinc-400">
-            Raw data is free (limited). Intelligence is paid. Proof is public.
+            Raw data is free (limited). The intelligence layer saves you hours.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {pricingPlans.map((plan) => (
@@ -424,7 +423,7 @@ export default function Home() {
       <footer className="border-t border-zinc-800/80 py-8">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 text-sm text-zinc-400 sm:px-6 lg:px-8">
           <p>
-            BotIndex Intelligence — Not data. Insight.
+            BotIndex — All the intelligence. None of the noise.
           </p>
           <p>BotIndex 2026</p>
         </div>

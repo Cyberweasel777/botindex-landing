@@ -3,9 +3,9 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BotIndex — Crypto Market Intelligence",
+  title: "BotIndex — All the Intelligence. None of the Noise.",
   description:
-    "Predictive crypto intelligence. Whale divergence, convergence scoring, network momentum. Verifiable track record. Not data — insight.",
+    "Stop scrolling 50 tabs. BotIndex synthesizes whale positions, developer activity, funding rates, and 19K+ daily demand signals into one brief. $9.99/mo.",
 };
 
 export default function RootLayout({
