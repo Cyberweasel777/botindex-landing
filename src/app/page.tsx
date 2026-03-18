@@ -2,174 +2,107 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const API_BASE = "https://api.botindex.dev/api/botindex";
+
+const intelligenceFeatures = [
+  {
+    icon: "🧠",
+    name: "Convergence Scoring",
+    description:
+      "Multi-source signal synthesis. When whale accumulation, developer activity, and market fear align — we see it before the move.",
+  },
+  {
+    icon: "🐋",
+    name: "Whale Divergence Detection",
+    description:
+      "Real-time whale position tracking across Hyperliquid. Know when smart money is loading while retail is selling.",
+  },
+  {
+    icon: "📡",
+    name: "Network Intelligence",
+    description:
+      "Proprietary momentum scoring from ecosystem development velocity, package adoption, and tooling growth. Not just price — the infrastructure underneath.",
+  },
+  {
+    icon: "🔮",
+    name: "Predictive Signals",
+    description:
+      "DeepSeek-synthesized market intelligence with verifiable accuracy. Every prediction logged with entry price. Track record published daily.",
+  },
+  {
+    icon: "⚡",
+    name: "Query Surge Intelligence",
+    description:
+      "What are 19,000+ API consumers searching for right now? Developer demand is a leading indicator. We track it. Nobody else does.",
+  },
+  {
+    icon: "🎯",
+    name: "Risk Radar",
+    description:
+      "Composite risk scoring across funding rates, liquidation maps, fear indices, and on-chain flows. One number that tells you the market regime.",
+  },
+];
+
 const pricingPlans = [
   {
-    name: "Free",
+    name: "Explorer",
     price: "$0",
-    cadence: "/mo",
-    limit: "10 req/day",
-    description: "For building and testing your first agents",
-    button:
-      "https://api.botindex.dev/api/botindex/keys/register?plan=free",
+    cadence: "",
+    description: "Raw market data. See what we track.",
+    features: [
+      "3 requests/day",
+      "Raw data endpoints only",
+      "Truncated results",
+      "No intelligence layer",
+    ],
+    cta: "Start Free",
+    href: `${API_BASE}/keys/register?plan=free`,
     featured: false,
   },
   {
-    name: "Pro",
+    name: "Pro Intelligence",
     price: "$9.99",
     cadence: "/mo",
-    limit: "500 req/day",
-    description: "For shipping production agents",
-    button:
-      "https://api.botindex.dev/api/botindex/keys/register?plan=pro",
+    description: "Full intelligence layer. See what others miss.",
+    features: [
+      "500 requests/day",
+      "Smart Money Flow analysis",
+      "Risk Radar with synthesis",
+      "Convergence scoring",
+      "Network Intelligence rankings",
+      "Full data — no truncation",
+    ],
+    cta: "Get Pro",
+    href: `${API_BASE}/keys/register?plan=pro`,
     featured: true,
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    cadence: "",
-    limit: "Unlimited",
-    description: "For teams with high-throughput automation",
-    button: "https://api.botindex.dev/api/botindex/contact",
+    name: "Sentinel",
+    price: "$49.99",
+    cadence: "/mo",
+    description: "Predictive signals with proof. See what's next.",
+    features: [
+      "Unlimited requests",
+      "Everything in Pro",
+      "Predictive signals (verifiable accuracy)",
+      "Query surge intelligence",
+      "Whale divergence alerts",
+      "Personal Telegram alert feed",
+      "Priority signal delivery",
+    ],
+    cta: "Get Sentinel",
+    href: `${API_BASE}/keys/register?plan=sentinel`,
     featured: false,
+    badge: "Intelligence",
   },
 ];
 
-const toolCategories = [
-  {
-    name: "Sports",
-    tools: [
-      { name: "live-odds", tag: "FREE" },
-      { name: "player-props", tag: "$0.01/call" },
-      { name: "ev-calculator", tag: "FREE" },
-      { name: "injury-report", tag: "$0.01/call" },
-      { name: "line-movement", tag: "$0.01/call" },
-      { name: "roster-changes", tag: "FREE" },
-      { name: "schedule", tag: "FREE" },
-    ],
-  },
-  {
-    name: "Crypto",
-    tools: [
-      { name: "token-scan", tag: "$0.02/call" },
-      { name: "whale-watch", tag: "$0.02/call" },
-      { name: "funding-rates", tag: "FREE" },
-      { name: "dex-volume", tag: "$0.02/call" },
-      { name: "holder-analysis", tag: "$0.02/call" },
-      { name: "intel", tag: "$0.05/call ★" },
-    ],
-  },
-  {
-    name: "Hyperliquid",
-    tools: [
-      { name: "funding-arb", tag: "$0.03/call" },
-      { name: "open-interest", tag: "FREE" },
-      { name: "liquidation-map", tag: "$0.03/call" },
-      { name: "position-tracker", tag: "$0.03/call" },
-      { name: "vault-stats", tag: "FREE" },
-      { name: "hip6-feed-history", tag: "FREE" },
-      { name: "hip6-alert-scores", tag: "FREE" },
-      { name: "hip6-launch-candidates", tag: "$0.01/call" },
-      { name: "intel", tag: "$0.05/call ★" },
-    ],
-  },
-  {
-    name: "Commerce",
-    tools: [
-      { name: "product-trends", tag: "FREE" },
-      { name: "deal-scanner", tag: "$0.01/call" },
-      { name: "price-tracker", tag: "$0.01/call" },
-    ],
-  },
-  {
-    name: "Solana",
-    tools: [
-      { name: "mint-monitor", tag: "$0.02/call" },
-      { name: "whale-tracker", tag: "$0.02/call" },
-    ],
-  },
-  {
-    name: "Doppler",
-    tools: [
-      { name: "launches", tag: "$0.01/call" },
-      { name: "score", tag: "$0.02/call" },
-      { name: "trending", tag: "$0.01/call" },
-      { name: "intel", tag: "$0.05/call ★" },
-    ],
-  },
-  {
-    name: "Zora",
-    tools: [
-      { name: "trending-coins", tag: "FREE" },
-      { name: "attention-momentum", tag: "$0.02/call" },
-      { name: "creator-scores", tag: "$0.02/call" },
-      { name: "intel", tag: "$0.05/call ★" },
-    ],
-  },
-  {
-    name: "Pump.fun",
-    tools: [
-      { name: "graduating", tag: "$0.01/call" },
-      { name: "graduated", tag: "$0.02/call" },
-      { name: "rug-score", tag: "$0.02/call" },
-    ],
-  },
-  {
-    name: "Trust Services",
-    tools: [
-      { name: "aar-sign", tag: "$0.001/call" },
-      { name: "scc-anchor", tag: "$0.01/call" },
-      { name: "verify", tag: "FREE" },
-    ],
-  },
+const proofPoints = [
+  { value: "19K+", label: "API requests tracked daily" },
+  { value: "16", label: "Assets under divergence monitoring" },
+  { value: "8", label: "Ecosystem momentum scores" },
+  { value: "15min", label: "Signal refresh cycle" },
 ];
-
-const links = [
-  {
-    title: "AAR Trust Layer",
-    href: "https://aar.botindex.dev",
-    description: "Open standard for verifiable AI agent actions. Ed25519-signed receipts.",
-  },
-  {
-    title: "Trust Verification Portal",
-    href: "https://api.botindex.dev/api/botindex/trust/verify",
-    description: "Verify any AAR receipt or SCC chain. Paste a receipt, get proof.",
-  },
-  {
-    title: "npm",
-    href: "https://www.npmjs.com/package/botindex-mcp-server",
-    description: "Install package and view versions.",
-  },
-  {
-    title: "GitHub",
-    href: "https://github.com/Cyberweasel777/botindex-mcp",
-    description: "Source code, issues, and examples.",
-  },
-  {
-    title: "Smithery",
-    href: "https://smithery.ai/server/cyberweasel777/botindex-mcp-server",
-    description: "Server profile and registry listing.",
-  },
-  {
-    title: "Anthropic Registry",
-    href: "https://github.com/anthropics/anthropic-cookbook/tree/main/misc/mcp_registry",
-    description: "Official MCP registry reference.",
-  },
-];
-
-const mcpConfig = `{
-  "mcpServers": {
-    "botindex": {
-      "command": "npx",
-      "args": ["-y", "botindex-mcp"],
-      "env": {
-        "BOTINDEX_API_KEY": "your_api_key"
-      }
-    }
-  }
-}`;
-
-const curlExample = `curl -X GET \\
-  "https://api.botindex.dev/api/botindex/keys/register?plan=free&email=you@example.com"`;
 
 export default function Home() {
   return (
@@ -182,93 +115,183 @@ export default function Home() {
             BotIndex
           </a>
           <div className="flex items-center gap-4 text-sm text-zinc-300 sm:gap-6">
+            <a href="#intelligence" className="transition hover:text-white">
+              Intelligence
+            </a>
             <a href="#pricing" className="transition hover:text-white">
               Pricing
             </a>
-            <a href="#tools" className="transition hover:text-white">
-              Tools
-            </a>
-            <a href="#quick-start" className="transition hover:text-white">
-              Quick Start
+            <a href="#track-record" className="transition hover:text-white">
+              Track Record
             </a>
             <a
-              href="https://smithery.ai/server/cyberweasel777/botindex-mcp-server"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:text-white"
-            >
-              Smithery
-            </a>
-            <a
-              href="https://api.botindex.dev/api/botindex/keys/connect"
+              href={`${API_BASE}/keys/register?plan=pro`}
               className="rounded-md border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-cyan-300 transition hover:bg-cyan-400/20"
             >
-              Connect Wallet
+              Get Started
             </a>
           </div>
         </nav>
       </header>
 
       <main id="top" className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Hero */}
         <section className="py-20 sm:py-28">
-          <h1 className="text-5xl font-semibold tracking-tight sm:text-7xl">
+          <p className="text-sm font-medium uppercase tracking-widest text-cyan-400">
+            Crypto Market Intelligence
+          </p>
+          <h1 className="mt-4 text-5xl font-semibold tracking-tight sm:text-7xl">
             <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
-              BotIndex
+              See the move
             </span>
+            <br />
+            <span className="text-white">before it happens.</span>
           </h1>
-          <p className="mt-5 max-w-2xl text-xl text-zinc-300 sm:text-2xl">
-            The first verifiable agent API.
+          <p className="mt-6 max-w-2xl text-xl text-zinc-300">
+            BotIndex synthesizes whale positions, developer activity, and
+            behavioral demand signals into predictive intelligence. Not data —
+            insight.
           </p>
-          <p className="mt-3 max-w-2xl text-base text-zinc-400">
-            Every response is cryptographically signed with an{" "}
-            <a href="https://aar.botindex.dev" target="_blank" rel="noopener noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200">
-              Agent Action Receipt
-            </a>
-            . Your agent can prove what it did, what data it received, and that nothing was tampered with.
-          </p>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-3 max-w-2xl">
-            <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
-              <p className="text-xs font-medium uppercase tracking-wide text-emerald-300">Ed25519 Signed</p>
-              <p className="mt-1 text-sm text-zinc-400">Every response carries a cryptographic receipt</p>
-            </div>
-            <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
-              <p className="text-xs font-medium uppercase tracking-wide text-cyan-300">22 Agent Tools</p>
-              <p className="mt-1 text-sm text-zinc-400">Sports, crypto, Hyperliquid, commerce intelligence</p>
-            </div>
-            <div className="rounded-lg border border-zinc-800 bg-zinc-900/60 px-4 py-3">
-              <p className="text-xs font-medium uppercase tracking-wide text-amber-300">x402 + Stripe</p>
-              <p className="mt-1 text-sm text-zinc-400">Pay per call with USDC or subscribe monthly</p>
-            </div>
-          </div>
-
-          <p className="mt-6 text-sm font-medium uppercase tracking-wide text-cyan-300">
-            Compatible with Mastercard Verifiable Intent · Coinbase x402 · Aztec ZK
+          <p className="mt-3 max-w-2xl text-base text-zinc-500">
+            19,000+ daily API requests tell us what the market is looking for.
+            Whale positions tell us where money is moving. Developer velocity
+            tells us what's being built. We connect the dots.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <div className="inline-flex items-center rounded-xl border border-zinc-700 bg-zinc-900 px-4 py-3">
-              <code className="text-sm text-zinc-100 sm:text-base">
-                npx -y botindex-mcp
-              </code>
-            </div>
+          <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href="https://aar.botindex.dev"
+              href={`${API_BASE}/keys/register?plan=pro`}
+              className="rounded-xl bg-white px-6 py-3 text-base font-semibold text-black transition hover:bg-zinc-200"
+            >
+              Start with Pro — $9.99/mo
+            </a>
+            <a
+              href={`${API_BASE}/sentinel/track-record`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-3 text-sm font-medium text-cyan-300 transition hover:bg-cyan-400/20"
+              className="rounded-xl border border-zinc-600 bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition hover:bg-zinc-800"
             >
-              Learn about AAR →
+              View Track Record →
             </a>
+          </div>
+
+          {/* Proof points */}
+          <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {proofPoints.map((p) => (
+              <div key={p.label} className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-center">
+                <p className="text-3xl font-bold text-white">{p.value}</p>
+                <p className="mt-1 text-xs text-zinc-500">{p.label}</p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section id="pricing" className="scroll-mt-24 py-8 sm:py-12">
+        {/* The problem */}
+        <section className="py-12">
+          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-8">
+            <h2 className="text-2xl font-semibold text-amber-300">
+              Raw data is a commodity.
+            </h2>
+            <p className="mt-3 max-w-3xl text-zinc-400">
+              CoinGecko, DexScreener, DefiLlama — everyone has the same data.
+              The edge isn't in the data. It's in knowing what the data means
+              <em> before </em> the market prices it in. BotIndex is the
+              intelligence layer that sits on top.
+            </p>
+          </div>
+        </section>
+
+        {/* Intelligence features */}
+        <section id="intelligence" className="scroll-mt-24 py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            Intelligence Layer
+          </h2>
+          <p className="mt-3 text-zinc-400">
+            Six proprietary signals. One convergence engine. Zero public data resale.
+          </p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {intelligenceFeatures.map((f) => (
+              <article
+                key={f.name}
+                className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6"
+              >
+                <p className="text-3xl">{f.icon}</p>
+                <h3 className="mt-3 text-lg font-semibold">{f.name}</h3>
+                <p className="mt-2 text-sm text-zinc-400">{f.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* How it works */}
+        <section className="py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            How it works
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+                1. Ingest
+              </p>
+              <p className="mt-3 text-sm text-zinc-400">
+                We continuously ingest whale positions, funding rates, developer
+                commits, package downloads, on-chain flows, and 19K+ daily API
+                demand signals.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+                2. Synthesize
+              </p>
+              <p className="mt-3 text-sm text-zinc-400">
+                DeepSeek synthesizes cross-source convergence patterns. When
+                whale accumulation + rising dev activity + growing fear align on
+                the same asset — that's a signal.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+                3. Deliver
+              </p>
+              <p className="mt-3 text-sm text-zinc-400">
+                Signals delivered via API, Telegram alerts, or dashboard. Every
+                prediction logged with entry price for verifiable accuracy.
+                Track record updated daily.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Track record teaser */}
+        <section id="track-record" className="scroll-mt-24 py-12">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center">
+            <h2 className="text-3xl font-semibold text-emerald-300">
+              Verifiable Track Record
+            </h2>
+            <p className="mt-3 mx-auto max-w-2xl text-zinc-400">
+              Every prediction is logged with a timestamped entry price.
+              Resolutions checked at 24h, 72h, and 7 days. No cherrypicking. No
+              hindsight. Just math.
+            </p>
+            <a
+              href={`${API_BASE}/sentinel/track-record`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-flex rounded-xl bg-emerald-500/20 border border-emerald-500/30 px-6 py-3 text-base font-semibold text-emerald-300 transition hover:bg-emerald-500/30"
+            >
+              View Live Track Record →
+            </a>
+            <p className="mt-4 text-xs text-zinc-600">
+              Data collection started March 2026. Accuracy improves with time.
+            </p>
+          </div>
+        </section>
+
+        {/* Pricing */}
+        <section id="pricing" className="scroll-mt-24 py-12">
           <h2 className="text-3xl font-semibold tracking-tight">Pricing</h2>
-          <p className="mt-3 max-w-3xl text-sm text-zinc-400">
-            Billing rails are separate by design: <span className="text-zinc-200">Stripe plans</span> for human teams and
-            <span className="text-zinc-200"> x402 pay-per-call</span> for autonomous bot-to-bot usage. If you use an API key subscription,
-            you are <span className="text-zinc-200">not double charged</span> by x402 on the same request path.
+          <p className="mt-3 text-zinc-400">
+            Raw data is free (limited). Intelligence is paid. Proof is public.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {pricingPlans.map((plan) => (
@@ -282,11 +305,16 @@ export default function Home() {
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold">{plan.name}</h3>
-                  {plan.featured ? (
-                    <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-xs font-medium text-cyan-300">
-                      Featured
+                  {plan.badge && (
+                    <span className="rounded-full bg-amber-400/15 px-3 py-1 text-xs font-medium text-amber-300">
+                      {plan.badge}
                     </span>
-                  ) : null}
+                  )}
+                  {plan.featured && (
+                    <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-xs font-medium text-cyan-300">
+                      Popular
+                    </span>
+                  )}
                 </div>
                 <p className="mt-4 text-3xl font-semibold">
                   {plan.price}
@@ -294,130 +322,101 @@ export default function Home() {
                     {plan.cadence}
                   </span>
                 </p>
-                <p className="mt-3 text-zinc-300">{plan.limit}</p>
                 <p className="mt-2 text-sm text-zinc-400">{plan.description}</p>
-                {plan.button ? (
-                  <a
-                    className="mt-6 inline-flex rounded-lg bg-white px-4 py-2 text-sm font-medium text-black transition hover:bg-zinc-200"
-                    href={plan.button}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Get {plan.name}
-                  </a>
-                ) : (
-                  <a
-                    className="mt-6 inline-flex rounded-lg border border-zinc-600 bg-zinc-800 px-4 py-2 text-sm font-medium text-zinc-100 transition hover:bg-zinc-700"
-                    href={plan.button}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Get Free Key
-                  </a>
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="py-8 sm:py-12">
-          <div className="rounded-2xl border border-cyan-400/30 bg-gradient-to-r from-cyan-400/5 to-emerald-400/5 p-6 sm:p-8">
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h3 className="text-xl font-semibold text-white">Pay with Crypto</h3>
-                <p className="mt-1 max-w-lg text-sm text-zinc-400">
-                  Connect your wallet for x402 pay-per-call payments. No subscription required.
-                  10% cheaper than Stripe. Verifiable on-chain receipts for every call.
-                </p>
-              </div>
-              <a
-                href="https://api.botindex.dev/api/botindex/keys/connect"
-                className="shrink-0 rounded-lg border border-cyan-400/40 bg-cyan-400/10 px-5 py-2.5 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400/20"
-              >
-                Connect Wallet →
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section id="tools" className="scroll-mt-24 py-8 sm:py-12">
-          <h2 className="text-3xl font-semibold tracking-tight">Tools</h2>
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            {toolCategories.map((category) => (
-              <article
-                key={category.name}
-                className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5"
-              >
-                <h3 className="text-lg font-semibold">{category.name}</h3>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {category.tools.map((tool) => (
-                    <div
-                      key={tool.name}
-                      className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-950 px-3 py-1.5 text-sm"
-                    >
-                      <span className="text-zinc-100">{tool.name}</span>
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-xs ${
-                          tool.tag === "FREE"
-                            ? "bg-emerald-400/15 text-emerald-300"
-                            : "bg-amber-400/15 text-amber-300"
-                        }`}
-                      >
-                        {tool.tag}
-                      </span>
-                    </div>
+                <ul className="mt-4 space-y-2">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-zinc-300">
+                      <span className="text-emerald-400 mt-0.5">✓</span>
+                      {f}
+                    </li>
                   ))}
-                </div>
+                </ul>
+                <a
+                  className={`mt-6 inline-flex w-full justify-center rounded-lg px-4 py-2.5 text-sm font-medium transition ${
+                    plan.featured
+                      ? "bg-white text-black hover:bg-zinc-200"
+                      : "border border-zinc-600 bg-zinc-800 text-zinc-100 hover:bg-zinc-700"
+                  }`}
+                  href={plan.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {plan.cta}
+                </a>
               </article>
             ))}
           </div>
         </section>
 
-        <section id="quick-start" className="scroll-mt-24 py-8 sm:py-12">
-          <h2 className="text-3xl font-semibold tracking-tight">Quick Start</h2>
+        {/* API quick start */}
+        <section className="py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            For developers
+          </h2>
+          <p className="mt-3 text-zinc-400">
+            REST API. JSON responses. Works with any language. MCP-compatible for AI agents.
+          </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
               <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-400">
-                MCP Config
+                Get Intelligence
               </h3>
               <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
-                <code>{mcpConfig}</code>
+                <code>{`curl -H "X-API-Key: your_key" \\
+  "${API_BASE}/synthesis/smart-money-flow"`}</code>
               </pre>
             </article>
             <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
               <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-400">
-                Register Key
+                Get Signals (Sentinel)
               </h3>
               <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
-                <code>{curlExample}</code>
+                <code>{`curl -H "X-API-Key: your_sentinel_key" \\
+  "${API_BASE}/sentinel/signals"`}</code>
               </pre>
             </article>
           </div>
         </section>
 
-        <section id="links" className="scroll-mt-24 py-8 sm:py-12">
-          <h2 className="text-3xl font-semibold tracking-tight">Links</h2>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {links.map((link) => (
-              <a
-                key={link.title}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
-              >
-                <h3 className="text-lg font-semibold">{link.title}</h3>
-                <p className="mt-2 text-sm text-zinc-400">{link.description}</p>
-                <p className="mt-3 text-sm text-cyan-300">{link.href}</p>
-              </a>
-            ))}
+        {/* Links */}
+        <section className="py-12">
+          <div className="grid gap-4 md:grid-cols-3">
+            <a
+              href="https://github.com/Cyberweasel777/King-Backend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
+            >
+              <h3 className="font-semibold">GitHub</h3>
+              <p className="mt-1 text-sm text-zinc-400">Open source. Verify the engine.</p>
+            </a>
+            <a
+              href={`${API_BASE}/sentinel/track-record`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
+            >
+              <h3 className="font-semibold">Track Record</h3>
+              <p className="mt-1 text-sm text-zinc-400">Live prediction accuracy. Updated daily.</p>
+            </a>
+            <a
+              href="https://aar.botindex.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
+            >
+              <h3 className="font-semibold">AAR Trust Layer</h3>
+              <p className="mt-1 text-sm text-zinc-400">Cryptographic receipts for every response.</p>
+            </a>
           </div>
         </section>
       </main>
 
       <footer className="border-t border-zinc-800/80 py-8">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 text-sm text-zinc-400 sm:px-6 lg:px-8">
-          <p>Built for agents. Verified by cryptography. Every action receipted.</p>
+          <p>
+            BotIndex Intelligence — Not data. Insight.
+          </p>
           <p>BotIndex 2026</p>
         </div>
       </footer>
