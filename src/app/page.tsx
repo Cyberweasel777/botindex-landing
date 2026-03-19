@@ -32,9 +32,9 @@ const intelligenceFeatures = [
   },
   {
     icon: "⚡",
-    name: "Query Surge Intelligence",
+    name: "Demand Signals",
     description:
-      "What are 19,000+ API consumers searching for right now? Developer demand is a leading indicator. We track it. Nobody else does.",
+      "See what's moving before price catches up. Proprietary demand indicators detect surging interest 4-12 hours ahead of price action.",
   },
   {
     icon: "🎯",
