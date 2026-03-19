@@ -203,12 +203,12 @@ export default function TrackRecordPage() {
           </div>
         </div>
 
-        {/* Recent Resolutions */}
+        {/* Recent Resolutions — limited, no prices */}
         {data.recentResolutions.length > 0 && (
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Recent Resolutions</h2>
             <div className="space-y-3">
-              {[...data.recentResolutions].reverse().map((r, i) => (
+              {[...data.recentResolutions].reverse().slice(0, 3).map((r, i) => (
                 <div
                   key={i}
                   className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 flex items-center justify-between"
@@ -225,7 +225,7 @@ export default function TrackRecordPage() {
                         </span>
                       </p>
                       <p className="text-zinc-500 text-sm">
-                        Entry: {formatPrice(r.entry_price)} → {formatPrice(r.price_at_24h)}
+                        {r.correct_24h === true ? "Signal confirmed" : r.correct_24h === false ? "Signal missed" : "Pending resolution"}
                         {r.pct_change_24h !== null && (
                           <span className={r.pct_change_24h >= 0 ? " text-green-400" : " text-red-400"}>
                             {" "}({r.pct_change_24h >= 0 ? "+" : ""}{r.pct_change_24h.toFixed(2)}%)
@@ -238,20 +238,22 @@ export default function TrackRecordPage() {
                 </div>
               ))}
             </div>
+            <p className="text-zinc-600 text-sm mt-4">Full resolution history available with Sentinel.</p>
           </div>
         )}
 
-        {/* Recent Predictions */}
+        {/* Live Signals — gated teaser */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Latest Signals</h2>
-          <div className="space-y-3">
-            {[...data.recentPredictions].reverse().map((p, i) => (
-              <div
-                key={i}
-                className="bg-zinc-900 border border-zinc-800 rounded-xl p-4"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
+          <h2 className="text-2xl font-bold mb-6">Live Signals</h2>
+          <div className="relative">
+            {/* Show 2 blurred signals as teaser */}
+            <div className="space-y-3">
+              {[...data.recentPredictions].reverse().slice(0, 2).map((p, i) => (
+                <div
+                  key={i}
+                  className="bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+                >
+                  <div className="flex items-center gap-2 mb-2">
                     <span className="text-lg">{TYPE_EMOJI[p.signal_type] || "📊"}</span>
                     <span className="font-bold">{p.asset}</span>
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
@@ -261,16 +263,26 @@ export default function TrackRecordPage() {
                     }`}>
                       {p.direction.toUpperCase()}
                     </span>
-                    <span className="text-zinc-500 text-xs">str: {p.strength}</span>
+                    <span className="text-zinc-600 text-xs">{timeAgo(p.timestamp)}</span>
                   </div>
-                  <span className="text-zinc-600 text-xs">{timeAgo(p.timestamp)}</span>
+                  <p className="text-zinc-600 text-sm blur-sm select-none">Signal intelligence and entry price available with Sentinel subscription</p>
                 </div>
-                <p className="text-zinc-400 text-sm">{p.narrative}</p>
-                {p.entry_price_usd && (
-                  <p className="text-zinc-600 text-xs mt-1">Entry: {formatPrice(p.entry_price_usd)}</p>
-                )}
+              ))}
+            </div>
+            {/* Overlay CTA */}
+            <div className="absolute inset-0 flex items-end justify-center bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent rounded-xl">
+              <div className="text-center pb-6">
+                <p className="text-zinc-300 font-semibold mb-3">
+                  {data.totalPredictions - data.resolved} signals pending resolution
+                </p>
+                <a
+                  href="https://api.botindex.dev/api/botindex/keys/register?plan=sentinel"
+                  className="inline-block px-6 py-3 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 border border-cyan-500/40 rounded-lg font-semibold transition"
+                >
+                  Unlock Live Signals — 7 Day Free Trial →
+                </a>
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
