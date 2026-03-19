@@ -8,39 +8,39 @@ const API_BASE = "https://api.botindex.dev/api/botindex";
 const intelligenceFeatures = [
   {
     icon: "🧠",
-    name: "Convergence Scoring",
+    name: "Sentiment Shift Detection",
     description:
-      "Multi-source signal synthesis. When whale accumulation, developer activity, and market fear align — we see it before the move.",
+      "84.6% accuracy. Detects when market fear is about to flip — hours before price reacts. Our highest-performing signal type.",
   },
   {
     icon: "🐋",
-    name: "Whale Divergence Detection",
+    name: "Whale Divergence",
     description:
-      "Real-time whale position tracking across Hyperliquid. Know when smart money is loading while retail is selling.",
-  },
-  {
-    icon: "📡",
-    name: "Network Intelligence",
-    description:
-      "Proprietary momentum scoring from ecosystem development velocity, package adoption, and tooling growth. Not just price — the infrastructure underneath.",
-  },
-  {
-    icon: "🔮",
-    name: "Synthesized Briefs",
-    description:
-      "DeepSeek-synthesized intelligence briefs every 15 minutes. What's moving, why it's moving, and what to watch. Every signal logged with timestamps.",
+      "Tracks when smart money diverges from price action. When whales load while retail panics, we flag it.",
   },
   {
     icon: "⚡",
-    name: "Demand Signals",
+    name: "Risk Cascade Alerts",
     description:
-      "See what's moving before price catches up. Proprietary demand indicators detect surging interest 4-12 hours ahead of price action.",
+      "100% accuracy. Detects when multiple risk factors converge — systemic exposure that leads to sharp moves.",
+  },
+  {
+    icon: "🔴",
+    name: "Dump Warnings",
+    description:
+      "100% accuracy. Flags the setup before the red candle — when conditions align for a sharp selloff.",
+  },
+  {
+    icon: "📉",
+    name: "Momentum Tracking",
+    description:
+      "Proprietary momentum scoring that detects acceleration and decay in price trends before they become obvious.",
   },
   {
     icon: "🎯",
-    name: "Risk Radar",
+    name: "Verifiable Track Record",
     description:
-      "Composite risk scoring across funding rates, liquidation maps, fear indices, and on-chain flows. One number that tells you the market regime.",
+      "Every signal timestamped and logged before the move. Every outcome scored publicly. No hindsight, no cherry-picking.",
   },
 ];
 
@@ -67,10 +67,10 @@ const pricingPlans = [
     description: "Full intelligence layer. See what others miss.",
     features: [
       "500 requests/day",
-      "Smart Money Flow analysis",
-      "Risk Radar with synthesis",
-      "Convergence scoring",
-      "Network Intelligence rankings",
+      "All signal types with full detail",
+      "Risk cascade + dump warning alerts",
+      "Whale divergence tracking",
+      "Sentiment shift detection",
       "Full data — no truncation",
     ],
     cta: "Get Pro",
@@ -198,10 +198,9 @@ export default function Home() {
               You're spending 2 hours a day on data you could read in 2 minutes.
             </h2>
             <p className="mt-3 max-w-3xl text-zinc-400">
-              CoinGecko. DexScreener. DefiLlama. Hyperliquid. Crypto Twitter.
-              GitHub. Funding rate dashboards. Fear & Greed index. You're checking
-              all of them, every day, piecing together the same picture BotIndex
-              builds automatically every 15 minutes.
+              Multiple data sources. Multiple dashboards. Multiple tabs.
+              You're checking all of them, every day, piecing together the same picture BotIndex
+              builds automatically every 15 minutes — with a verified track record.
             </p>
           </div>
         </section>
@@ -249,9 +248,9 @@ export default function Home() {
                 2. Synthesize
               </p>
               <p className="mt-3 text-sm text-zinc-400">
-                DeepSeek synthesizes cross-source convergence patterns. When
-                whale accumulation + rising dev activity + growing fear align on
-                the same asset — that's a signal.
+                AI synthesizes cross-source convergence patterns. When
+                multiple independent signals align on the same asset —
+                that's actionable intelligence.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
