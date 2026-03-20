@@ -35,23 +35,11 @@ interface TrackRecord {
 }
 
 const TYPE_LABELS: Record<string, string> = {
-  sentiment_shift: "Sentiment Shift",
-  risk_cascade: "Risk Cascade",
-  dump_warning: "Dump Warning",
-  whale_divergence: "Whale Divergence",
-  pump_signal: "Pump Signal",
-  momentum_decay: "Momentum Decay",
-  momentum_surge: "Momentum Surge",
+  ecosystem_momentum: "Ecosystem Intelligence",
 };
 
 const TYPE_EMOJI: Record<string, string> = {
-  sentiment_shift: "🧠",
-  risk_cascade: "⚡",
-  dump_warning: "🔴",
-  whale_divergence: "🐋",
-  pump_signal: "🚀",
-  momentum_decay: "📉",
-  momentum_surge: "📈",
+  ecosystem_momentum: "📡",
 };
 
 function AccuracyBadge({ accuracy, samples }: { accuracy: number; samples: number }) {
