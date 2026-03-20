@@ -284,7 +284,7 @@ export default function Home() {
               and 7 days. No cherrypicking. No hindsight.
             </p>
             <GALink
-              href={`${API_BASE}/sentinel/track-record`}
+              href={"/sentinel/track-record"}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex rounded-xl bg-emerald-500/20 border border-emerald-500/30 px-6 py-3 text-base font-semibold text-emerald-300 transition hover:bg-emerald-500/30"
@@ -405,7 +405,7 @@ export default function Home() {
               <p className="mt-1 text-sm text-zinc-400">Open source. Verify the engine.</p>
             </a>
             <a
-              href={`${API_BASE}/sentinel/track-record`}
+              href={"/sentinel/track-record"}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
