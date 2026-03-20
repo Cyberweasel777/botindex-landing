@@ -37,6 +37,12 @@ const intelligenceFeatures = [
       "Proprietary momentum scoring that detects acceleration and decay in price trends before they become obvious.",
   },
   {
+    icon: "📡",
+    name: "Ecosystem Momentum",
+    description:
+      "Tracks GitHub commit velocity, npm download trends, and developer activity across crypto projects. Dev activity leads price by days — we see it first.",
+  },
+  {
     icon: "🎯",
     name: "Verifiable Track Record",
     description:
@@ -68,6 +74,7 @@ const pricingPlans = [
     features: [
       "500 requests/day",
       "All signal types with full detail",
+      "Ecosystem momentum (GitHub + npm intelligence)",
       "Risk cascade + dump warning alerts",
       "Whale divergence tracking",
       "Sentiment shift detection",
