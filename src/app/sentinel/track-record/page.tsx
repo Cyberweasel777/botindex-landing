@@ -276,22 +276,22 @@ export default function TrackRecordPage() {
 
         {/* CTA */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-8 text-center">
-          <h3 className="text-xl font-bold mb-2">Get Real-Time Signals</h3>
+          <h3 className="text-xl font-bold mb-2">See What Developers Are Building</h3>
           <p className="text-zinc-400 mb-6">
-            Free delayed signals on Telegram. Real-time with Sentinel.
+            104 developer data sources. 25+ crypto assets. Signals backed by GitHub commits, npm downloads, and crate adoption — not charts or sentiment.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="https://t.me/BotIndexSignals"
+              href="/"
               className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-lg font-semibold transition"
             >
-              Free Signals →
+              Learn More →
             </a>
             <a
               href="https://api.botindex.dev/api/botindex/keys/register?plan=sentinel"
               className="px-6 py-3 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 border border-cyan-500/40 rounded-lg font-semibold transition"
             >
-              Sentinel — 7 Day Free Trial →
+              Start 7-Day Free Trial — $49.99/mo after
             </a>
           </div>
         </div>
