@@ -8,24 +8,21 @@ const API_BASE = "https://api.botindex.dev/api/botindex";
 const dataSources = [
   {
     icon: "📦",
-    name: "Package Downloads",
-    count: "72",
+    name: "Adoption Velocity",
     description:
-      "npm, PyPI, and crates.io. When developers start downloading a project's tools faster than last week, money follows.",
+      "We monitor real-time developer tool adoption across multiple package ecosystems. When the people who build crypto infrastructure start reaching for new tools — that's a signal price hasn't caught yet.",
   },
   {
     icon: "⚡",
-    name: "GitHub Commits",
-    count: "32",
+    name: "Build Momentum",
     description:
-      "Repos across BTC, ETH, SOL, and 20+ other assets. Commit velocity spikes mean something is shipping — before the market notices.",
+      "We track shipping velocity across 30+ protocol codebases. Not just 'are they active' — our scoring detects acceleration, deceleration, and anomalous bursts that precede major releases.",
   },
   {
     icon: "🔀",
-    name: "Fork & Star Velocity",
-    count: "32",
+    name: "Cross-Source Convergence",
     description:
-      "When devs start forking a protocol's code, adoption is coming. Stars track attention. Forks track intent.",
+      "Any single data point is noise. Our engine scores agreement across independent signals — when adoption, build velocity, and ecosystem growth all align on the same asset, confidence compounds.",
   },
 ];
 
@@ -37,10 +34,10 @@ const sampleSignal = {
   sources: 4,
   signals: 8,
   details: [
-    "solana-sdk crate downloads ↑ 18% week-over-week",
-    "@solana/web3.js npm installs ↑ 12%",
-    "solana-labs/solana: 47 commits this week (above baseline)",
-    "anchor-lang crate downloads ↑ 9%",
+    "Rust SDK adoption ↑ 18% week-over-week (above 90-day baseline)",
+    "Primary client library installs ↑ 12% across 2 ecosystems",
+    "Core protocol: 47 commits this week — 2.3x normal velocity",
+    "Developer framework adoption accelerating (↑ 9%)",
   ],
 };
 
@@ -221,53 +218,53 @@ export default function Home() {
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
               <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                1. Track
+                1. Ingest
               </p>
               <h3 className="mt-3 text-lg font-semibold">
-                104 developer sources
+                100+ proprietary inputs
               </h3>
               <p className="mt-2 text-sm text-zinc-400">
-                Every hour, we pull commit counts, package download numbers,
-                fork rates, and star velocity from GitHub, npm, PyPI, and
-                crates.io for 25+ crypto assets.
+                Continuous ingestion across developer ecosystems, package
+                registries, and protocol codebases. Each source is baselined
+                against its own historical norm — not generic thresholds.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
               <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                2. Compare
+                2. Score
               </p>
               <h3 className="mt-3 text-lg font-semibold">
-                Week-over-week changes
+                Cross-source convergence
               </h3>
               <p className="mt-2 text-sm text-zinc-400">
-                We compare this week&apos;s activity to last week&apos;s. A
-                spike in @solana/web3.js downloads means developers are
-                building Solana apps right now. That&apos;s a leading signal.
+                Proprietary weighting ranks each source by predictive value.
+                Signals fire only when independent data streams converge on
+                the same asset — reducing false positives to noise.
               </p>
             </div>
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
               <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                3. Signal
+                3. Verify
               </p>
               <h3 className="mt-3 text-lg font-semibold">
-                Bullish, bearish, or neutral
+                Every call scored publicly
               </h3>
               <p className="mt-2 text-sm text-zinc-400">
-                When multiple sources for the same asset all point the same
-                direction, we generate a signal. More sources agreeing = higher
-                confidence. Then we check if price followed — publicly.
+                Every signal is timestamped before the move. Resolutions are
+                checked automatically against price. Wins and losses published
+                openly. No signal provider does this.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Data sources */}
+        {/* Signal methodology */}
         <section className="py-12">
           <h2 className="text-3xl font-semibold tracking-tight">
-            What we track
+            The signals Wall Street can&apos;t see
           </h2>
           <p className="mt-3 text-zinc-400">
-            Three data platforms. Zero price data. That&apos;s the edge.
+            We don&apos;t read charts. We read the infrastructure layer — where developers ship code, adopt tools, and build before markets react.
           </p>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {dataSources.map((s) => (
@@ -275,12 +272,7 @@ export default function Home() {
                 key={s.name}
                 className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6"
               >
-                <div className="flex items-center justify-between">
-                  <p className="text-3xl">{s.icon}</p>
-                  <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300">
-                    {s.count} sources
-                  </span>
-                </div>
+                <p className="text-3xl">{s.icon}</p>
                 <h3 className="mt-3 text-lg font-semibold">{s.name}</h3>
                 <p className="mt-2 text-sm text-zinc-400">{s.description}</p>
               </article>
@@ -353,18 +345,19 @@ export default function Home() {
               <div>
                 <h3 className="font-semibold text-white">It&apos;s not priced in</h3>
                 <p className="mt-2 text-sm text-zinc-400">
-                  No crypto screener tracks npm downloads. No trading terminal
-                  shows crate adoption rates. This data isn&apos;t in anyone&apos;s
-                  model — which means the market hasn&apos;t priced it in yet.
+                  No crypto screener tracks developer infrastructure adoption.
+                  No trading terminal shows protocol build velocity. This data
+                  isn&apos;t in anyone&apos;s model — which means the market
+                  hasn&apos;t priced it in yet.
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold text-white">It can&apos;t be faked</h3>
                 <p className="mt-2 text-sm text-zinc-400">
-                  You can fake Twitter hype. You can manipulate trading
-                  volume. You can&apos;t fake 47 GitHub commits in a week or
-                  100,000 real npm installs. Developer activity is the
-                  hardest signal to manipulate.
+                  You can fake Twitter hype. You can wash trading volume.
+                  You can&apos;t fake thousands of real developer tool installs
+                  or sustained protocol shipping velocity. Developer activity
+                  is the hardest signal to manipulate.
                 </p>
               </div>
               <div>
