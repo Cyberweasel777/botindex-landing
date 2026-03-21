@@ -5,111 +5,101 @@ const inter = Inter({ subsets: ["latin"] });
 
 const API_BASE = "https://api.botindex.dev/api/botindex";
 
-const intelligenceFeatures = [
+const dataSources = [
   {
-    icon: "🧠",
-    name: "Sentiment Shift Detection",
+    icon: "📦",
+    name: "Package Downloads",
+    count: "72",
     description:
-      "84.6% accuracy. Detects when market fear is about to flip — hours before price reacts. Our highest-performing signal type.",
-  },
-  {
-    icon: "🐋",
-    name: "Whale Divergence",
-    description:
-      "Tracks when smart money diverges from price action. When whales load while retail panics, we flag it.",
+      "npm, PyPI, and crates.io. When developers start downloading a project's tools faster than last week, money follows.",
   },
   {
     icon: "⚡",
-    name: "Risk Cascade Alerts",
+    name: "GitHub Commits",
+    count: "32",
     description:
-      "100% accuracy. Detects when multiple risk factors converge — systemic exposure that leads to sharp moves.",
+      "Repos across BTC, ETH, SOL, and 20+ other assets. Commit velocity spikes mean something is shipping — before the market notices.",
   },
   {
-    icon: "🔴",
-    name: "Dump Warnings",
+    icon: "🔀",
+    name: "Fork & Star Velocity",
+    count: "32",
     description:
-      "100% accuracy. Flags the setup before the red candle — when conditions align for a sharp selloff.",
+      "When devs start forking a protocol's code, adoption is coming. Stars track attention. Forks track intent.",
   },
-  {
-    icon: "📉",
-    name: "Momentum Tracking",
-    description:
-      "Proprietary momentum scoring that detects acceleration and decay in price trends before they become obvious.",
-  },
-  {
-    icon: "📡",
-    name: "Ecosystem Momentum",
-    description:
-      "Tracks GitHub commit velocity, npm download trends, and developer activity across crypto projects. Dev activity leads price by days — we see it first.",
-  },
-  {
-    icon: "🎯",
-    name: "Verifiable Track Record",
-    description:
-      "Every signal timestamped and logged before the move. Every outcome scored publicly. No hindsight, no cherry-picking.",
-  },
+];
+
+const sampleSignal = {
+  asset: "SOL",
+  direction: "Bullish",
+  strength: 75,
+  confidence: "High",
+  sources: 4,
+  signals: 8,
+  details: [
+    "solana-sdk crate downloads ↑ 18% week-over-week",
+    "@solana/web3.js npm installs ↑ 12%",
+    "solana-labs/solana: 47 commits this week (above baseline)",
+    "anchor-lang crate downloads ↑ 9%",
+  ],
+};
+
+const proofPoints = [
+  { value: "59.5%", label: "Verified accuracy" },
+  { value: "104", label: "Data sources tracked" },
+  { value: "1,000+", label: "Signals scored" },
+  { value: "1hr", label: "Resolution window" },
 ];
 
 const pricingPlans = [
   {
-    name: "Explorer",
+    name: "Free",
     price: "$0",
     cadence: "",
-    description: "Raw market data. See what we track.",
+    description: "See which assets are moving. No details.",
     features: [
-      "3 requests/day",
-      "Raw data endpoints only",
-      "Truncated results",
-      "No intelligence layer",
+      "Aggregate signals (direction only)",
+      "Public track record",
+      "10 API calls/day",
     ],
     cta: "Start Free",
     href: `${API_BASE}/keys/register?plan=free`,
     featured: false,
   },
   {
-    name: "Pro Intelligence",
+    name: "Pro",
     price: "$9.99",
     cadence: "/mo",
-    description: "Full intelligence layer. See what others miss.",
+    description: "Full data access. Build your own analysis.",
     features: [
       "500 requests/day",
-      "All signal types with full detail",
-      "Ecosystem momentum (GitHub + npm intelligence)",
-      "Risk cascade + dump warning alerts",
-      "Whale divergence tracking",
-      "Sentiment shift detection",
-      "Full data — no truncation",
+      "Raw ecosystem data (all 104 sources)",
+      "Download trends, commit velocity, fork rates",
+      "Full JSON — no truncation",
     ],
     cta: "Get Pro",
     href: `${API_BASE}/keys/register?plan=pro`,
-    featured: true,
+    featured: false,
   },
   {
     name: "Sentinel",
     price: "$49.99",
     cadence: "/mo",
-    description: "Full intelligence pipeline. Delivered to you.",
+    description: "The signals that tell you what to watch.",
     features: [
-      "Unlimited requests",
       "Everything in Pro",
-      "Real-time Telegram alerts",
-      "Query surge intelligence",
-      "Whale divergence alerts",
-      "Full synthesized briefs every 15 min",
-      "Priority signal delivery",
+      "Individual signal breakdown per package & repo",
+      "Which specific sources are driving each signal",
+      "Growth percentages, commit counts, strength scores",
+      "Full narrative: why the signal fired",
+      "Unlimited API access",
+      "7-day free trial",
     ],
-    cta: "Get Sentinel",
+    cta: "Start Free Trial",
     href: `${API_BASE}/keys/register?plan=sentinel`,
-    featured: false,
-    badge: "Intelligence",
+    featured: true,
+    badge: "7-day trial",
   },
-];
-
-const proofPoints = [
-  { value: "19K+", label: "API requests tracked daily" },
-  { value: "16", label: "Assets under divergence monitoring" },
-  { value: "8", label: "Ecosystem momentum scores" },
-  { value: "15min", label: "Signal refresh cycle" },
 ];
 
 export default function Home() {
@@ -120,24 +110,26 @@ export default function Home() {
       <header className="sticky top-0 z-30 border-b border-zinc-800/80 bg-[#0a0a0a]/90 backdrop-blur">
         <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
           <a href="#top" className="text-lg font-semibold tracking-tight">
-            BotIndex
+            BotIndex<span className="text-cyan-400">.</span>
           </a>
           <div className="flex items-center gap-4 text-sm text-zinc-300 sm:gap-6">
-            <a href="#intelligence" className="transition hover:text-white">
-              Intelligence
+            <a href="#how-it-works" className="transition hover:text-white">
+              How It Works
             </a>
             <a href="#pricing" className="transition hover:text-white">
               Pricing
             </a>
             <a href="#track-record" className="transition hover:text-white">
-              Transparency
+              Track Record
             </a>
-            <a
-              href={`${API_BASE}/keys/register?plan=pro`}
+            <GALink
+              href={`${API_BASE}/keys/register?plan=sentinel`}
               className="rounded-md border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-cyan-300 transition hover:bg-cyan-400/20"
+              event="cta_nav"
+              label="nav_start"
             >
-              Get Started
-            </a>
+              Start Free Trial
+            </GALink>
           </div>
         </nav>
       </header>
@@ -146,51 +138,54 @@ export default function Home() {
         {/* Hero */}
         <section className="py-20 sm:py-28">
           <p className="text-sm font-medium uppercase tracking-widest text-cyan-400">
-            Crypto Market Intelligence
+            Developer data → Price signals
           </p>
-          <h1 className="mt-4 text-5xl font-semibold tracking-tight sm:text-7xl">
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
-              All the intelligence.
+          <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
+            <span className="text-white">
+              Know what developers are building
             </span>
             <br />
-            <span className="text-white">None of the noise.</span>
+            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-emerald-300 bg-clip-text text-transparent">
+              before the market prices it in.
+            </span>
           </h1>
           <p className="mt-6 max-w-2xl text-xl text-zinc-300">
-            BotIndex reads whale positions, developer activity, funding rates,
-            and 19K+ daily demand signals — so you don't have to. One
-            synthesized brief instead of 50 tabs.
+            BotIndex tracks 104 developer data sources — GitHub commits, npm
+            downloads, Rust crate adoption — across 25+ crypto assets. When
+            developer activity spikes, price follows. We see the spike first.
           </p>
           <p className="mt-3 max-w-2xl text-base text-zinc-500">
-            Stop scrolling CoinGecko, DexScreener, and Crypto Twitter for
-            hours. Get a 15-minute intelligence brief that covers what moved,
-            why it moved, and what to watch next.
+            59.5% verified accuracy. Every prediction timestamped, scored, and
+            published. No charts. No sentiment. No guessing. Just developer
+            momentum data that leads price by days.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <GALink
-              href={`${API_BASE}/keys/register?plan=pro`}
+              href={`${API_BASE}/keys/register?plan=sentinel`}
               className="rounded-xl bg-white px-6 py-3 text-base font-semibold text-black transition hover:bg-zinc-200"
-              event="cta_hero_pro"
-              label="hero_start_pro"
+              event="cta_hero_sentinel"
+              label="hero_start_sentinel"
             >
-              Start with Pro — $9.99/mo
+              Start 7-Day Free Trial
             </GALink>
             <GALink
-              href="https://t.me/BotIndexHacks_Bot"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/sentinel/track-record"
               className="rounded-xl border border-zinc-600 bg-zinc-900 px-6 py-3 text-base font-medium text-zinc-100 transition hover:bg-zinc-800"
-              event="cta_hero_telegram"
-              label="hero_telegram_bot"
+              event="cta_hero_track_record"
+              label="hero_track_record"
             >
-              Get Alerts on Telegram →
+              See the Track Record →
             </GALink>
           </div>
 
           {/* Proof points */}
           <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {proofPoints.map((p) => (
-              <div key={p.label} className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-center">
+              <div
+                key={p.label}
+                className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-4 text-center"
+              >
                 <p className="text-3xl font-bold text-white">{p.value}</p>
                 <p className="mt-1 text-xs text-zinc-500">{p.label}</p>
               </div>
@@ -198,95 +193,215 @@ export default function Home() {
           </div>
         </section>
 
-        {/* The problem */}
+        {/* The insight */}
         <section className="py-12">
-          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-8">
-            <h2 className="text-2xl font-semibold text-amber-300">
-              You're spending 2 hours a day on data you could read in 2 minutes.
+          <div className="rounded-2xl border border-cyan-500/20 bg-cyan-500/5 p-8">
+            <h2 className="text-2xl font-semibold text-cyan-300">
+              Developer activity leads price by days — sometimes weeks.
             </h2>
             <p className="mt-3 max-w-3xl text-zinc-400">
-              Multiple data sources. Multiple dashboards. Multiple tabs.
-              You're checking all of them, every day, piecing together the same picture BotIndex
-              builds automatically every 15 minutes — with a verified track record.
+              When Solana&apos;s npm package downloads spike 18% in a week,
+              it means developers are building on it right now. When a
+              protocol&apos;s GitHub commits dry up, the team has stopped
+              shipping. These are leading indicators that charts can&apos;t
+              show you. By the time it hits the price chart, the move already
+              started.
             </p>
           </div>
         </section>
 
-        {/* Intelligence features */}
-        <section id="intelligence" className="scroll-mt-24 py-12">
+        {/* How it works */}
+        <section id="how-it-works" className="scroll-mt-24 py-12">
           <h2 className="text-3xl font-semibold tracking-tight">
-            Intelligence Layer
+            How it works
           </h2>
           <p className="mt-3 text-zinc-400">
-            Six proprietary signals. One convergence engine. Zero public data resale.
+            We track what developers are actually doing — not what traders are saying.
           </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {intelligenceFeatures.map((f) => (
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+                1. Track
+              </p>
+              <h3 className="mt-3 text-lg font-semibold">
+                104 developer sources
+              </h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                Every hour, we pull commit counts, package download numbers,
+                fork rates, and star velocity from GitHub, npm, PyPI, and
+                crates.io for 25+ crypto assets.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+                2. Compare
+              </p>
+              <h3 className="mt-3 text-lg font-semibold">
+                Week-over-week changes
+              </h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                We compare this week&apos;s activity to last week&apos;s. A
+                spike in @solana/web3.js downloads means developers are
+                building Solana apps right now. That&apos;s a leading signal.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
+                3. Signal
+              </p>
+              <h3 className="mt-3 text-lg font-semibold">
+                Bullish, bearish, or neutral
+              </h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                When multiple sources for the same asset all point the same
+                direction, we generate a signal. More sources agreeing = higher
+                confidence. Then we check if price followed — publicly.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Data sources */}
+        <section className="py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            What we track
+          </h2>
+          <p className="mt-3 text-zinc-400">
+            Three data platforms. Zero price data. That&apos;s the edge.
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {dataSources.map((s) => (
               <article
-                key={f.name}
+                key={s.name}
                 className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6"
               >
-                <p className="text-3xl">{f.icon}</p>
-                <h3 className="mt-3 text-lg font-semibold">{f.name}</h3>
-                <p className="mt-2 text-sm text-zinc-400">{f.description}</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-3xl">{s.icon}</p>
+                  <span className="rounded-full bg-zinc-800 px-3 py-1 text-xs font-medium text-zinc-300">
+                    {s.count} sources
+                  </span>
+                </div>
+                <h3 className="mt-3 text-lg font-semibold">{s.name}</h3>
+                <p className="mt-2 text-sm text-zinc-400">{s.description}</p>
               </article>
             ))}
           </div>
         </section>
 
-        {/* How it works */}
+        {/* Sample signal */}
         <section className="py-12">
           <h2 className="text-3xl font-semibold tracking-tight">
-            How it works
+            What a signal looks like
           </h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
-              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                1. Ingest
+          <p className="mt-3 text-zinc-400">
+            This is a real example of what Sentinel subscribers see.
+          </p>
+          <div className="mt-8 rounded-2xl border border-cyan-500/30 bg-zinc-900/80 p-6 sm:p-8">
+            <div className="flex flex-wrap items-center gap-4">
+              <span className="text-2xl font-bold">{sampleSignal.asset}</span>
+              <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-sm font-medium text-emerald-300">
+                {sampleSignal.direction}
+              </span>
+              <span className="rounded-full bg-zinc-800 px-3 py-1 text-sm text-zinc-300">
+                Strength: {sampleSignal.strength}/100
+              </span>
+              <span className="rounded-full bg-zinc-800 px-3 py-1 text-sm text-zinc-300">
+                Confidence: {sampleSignal.confidence}
+              </span>
+              <span className="rounded-full bg-zinc-800 px-3 py-1 text-sm text-zinc-300">
+                {sampleSignal.sources} sources, {sampleSignal.signals} signals
+              </span>
+            </div>
+            <div className="mt-6 space-y-2">
+              <p className="text-xs font-medium uppercase tracking-widest text-zinc-500">
+                Why this signal fired:
               </p>
-              <p className="mt-3 text-sm text-zinc-400">
-                We continuously ingest whale positions, funding rates, developer
-                commits, package downloads, on-chain flows, and 19K+ daily API
-                demand signals.
+              {sampleSignal.details.map((d) => (
+                <div
+                  key={d}
+                  className="flex items-start gap-2 text-sm text-zinc-300"
+                >
+                  <span className="mt-0.5 text-cyan-400">→</span>
+                  {d}
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 rounded-lg border border-zinc-700 bg-zinc-950 p-4">
+              <p className="text-sm text-zinc-400">
+                <span className="font-medium text-zinc-200">
+                  What this means:
+                </span>{" "}
+                Solana developer tools are seeing accelerating adoption across
+                4 independent platforms. When this many developers are building
+                at once, network usage and token demand typically follow within
+                days.
               </p>
             </div>
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
-              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                2. Synthesize
-              </p>
-              <p className="mt-3 text-sm text-zinc-400">
-                AI synthesizes cross-source convergence patterns. When
-                multiple independent signals align on the same asset —
-                that's actionable intelligence.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
-              <p className="text-sm font-bold uppercase tracking-widest text-cyan-400">
-                3. Deliver
-              </p>
-              <p className="mt-3 text-sm text-zinc-400">
-                Intelligence delivered via API or straight to your Telegram.
-                No dashboards to check. No tabs to monitor. It comes to you.
-              </p>
+            <p className="mt-4 text-xs text-zinc-600">
+              Free users see: &quot;SOL: Bullish.&quot; Sentinel users see everything above.
+            </p>
+          </div>
+        </section>
+
+        {/* Why this edge works */}
+        <section className="py-12">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8">
+            <h2 className="text-2xl font-semibold text-emerald-300">
+              Why developer data is an edge
+            </h2>
+            <div className="mt-6 grid gap-6 md:grid-cols-2">
+              <div>
+                <h3 className="font-semibold text-white">It&apos;s not priced in</h3>
+                <p className="mt-2 text-sm text-zinc-400">
+                  No crypto screener tracks npm downloads. No trading terminal
+                  shows crate adoption rates. This data isn&apos;t in anyone&apos;s
+                  model — which means the market hasn&apos;t priced it in yet.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-white">It can&apos;t be faked</h3>
+                <p className="mt-2 text-sm text-zinc-400">
+                  You can fake Twitter hype. You can manipulate trading
+                  volume. You can&apos;t fake 47 GitHub commits in a week or
+                  100,000 real npm installs. Developer activity is the
+                  hardest signal to manipulate.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-white">It leads price</h3>
+                <p className="mt-2 text-sm text-zinc-400">
+                  Developers build before users arrive. Users arrive before
+                  speculators pile in. By tracking the first link in the
+                  chain, you see the move days before it shows up on a chart.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-white">It&apos;s verifiable</h3>
+                <p className="mt-2 text-sm text-zinc-400">
+                  Every signal is timestamped. Every resolution is scored
+                  publicly. 59.5% accuracy across 1,000+ predictions — checked
+                  hourly, published openly. No other crypto signal provider
+                  does this.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Track record teaser */}
+        {/* Track record */}
         <section id="track-record" className="scroll-mt-24 py-12">
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-8 text-center">
-            <h2 className="text-3xl font-semibold text-emerald-300">
-              Transparent by Default
+          <div className="rounded-2xl border border-zinc-700 bg-zinc-900/60 p-8 text-center">
+            <h2 className="text-3xl font-semibold">
+              59.5% accuracy. Verified.
             </h2>
             <p className="mt-3 mx-auto max-w-2xl text-zinc-400">
-              Every signal is logged with a timestamp and entry price. We publish
-              what we said and when we said it. Resolutions checked at 24h, 72h,
-              and 7 days. No cherrypicking. No hindsight.
+              Every prediction is logged before the price moves. Every outcome
+              is scored automatically. We publish our wins and our losses.
+              No other crypto signal product gives you a live, auditable
+              track record.
             </p>
             <GALink
-              href={"/sentinel/track-record"}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/sentinel/track-record"
               className="mt-6 inline-flex rounded-xl bg-emerald-500/20 border border-emerald-500/30 px-6 py-3 text-base font-semibold text-emerald-300 transition hover:bg-emerald-500/30"
               event="cta_track_record"
               label="track_record_section"
@@ -294,8 +409,41 @@ export default function Home() {
               View Live Track Record →
             </GALink>
             <p className="mt-4 text-xs text-zinc-600">
-              Data collection started March 2026. Accuracy improves with time.
+              Live since March 2026. Accuracy recalculated hourly.
             </p>
+          </div>
+        </section>
+
+        {/* Who it's for */}
+        <section className="py-12">
+          <h2 className="text-3xl font-semibold tracking-tight">
+            Who this is for
+          </h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <h3 className="text-lg font-semibold">Crypto traders</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                You want an edge that isn&apos;t on TradingView. Developer
+                momentum tells you which assets have real building activity
+                behind them — not just hype.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <h3 className="text-lg font-semibold">Fund managers</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                Alternative data for crypto allocation. Developer ecosystem
+                health is a fundamental signal that complements on-chain
+                analytics and market data.
+              </p>
+            </div>
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-6">
+              <h3 className="text-lg font-semibold">AI agents & bots</h3>
+              <p className="mt-2 text-sm text-zinc-400">
+                REST API with JSON responses. Feed developer momentum
+                signals directly into your trading bot or AI agent. MCP
+                compatible.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -303,7 +451,7 @@ export default function Home() {
         <section id="pricing" className="scroll-mt-24 py-12">
           <h2 className="text-3xl font-semibold tracking-tight">Pricing</h2>
           <p className="mt-3 text-zinc-400">
-            Raw data is free (limited). The intelligence layer saves you hours.
+            Free shows you direction. Sentinel shows you why.
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {pricingPlans.map((plan) => (
@@ -318,13 +466,8 @@ export default function Home() {
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-semibold">{plan.name}</h3>
                   {plan.badge && (
-                    <span className="rounded-full bg-amber-400/15 px-3 py-1 text-xs font-medium text-amber-300">
+                    <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-medium text-emerald-300">
                       {plan.badge}
-                    </span>
-                  )}
-                  {plan.featured && (
-                    <span className="rounded-full bg-cyan-400/15 px-3 py-1 text-xs font-medium text-cyan-300">
-                      Popular
                     </span>
                   )}
                 </div>
@@ -334,10 +477,15 @@ export default function Home() {
                     {plan.cadence}
                   </span>
                 </p>
-                <p className="mt-2 text-sm text-zinc-400">{plan.description}</p>
+                <p className="mt-2 text-sm text-zinc-400">
+                  {plan.description}
+                </p>
                 <ul className="mt-4 space-y-2">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-zinc-300">
+                    <li
+                      key={f}
+                      className="flex items-start gap-2 text-sm text-zinc-300"
+                    >
                       <span className="text-emerald-400 mt-0.5">✓</span>
                       {f}
                     </li>
@@ -350,9 +498,7 @@ export default function Home() {
                       : "border border-zinc-600 bg-zinc-800 text-zinc-100 hover:bg-zinc-700"
                   }`}
                   href={plan.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  event={`cta_pricing_${plan.name.toLowerCase().replace(/\s+/g, "_")}`}
+                  event={`cta_pricing_${plan.name.toLowerCase()}`}
                   label={`pricing_${plan.name.toLowerCase()}`}
                 >
                   {plan.cta}
@@ -362,76 +508,77 @@ export default function Home() {
           </div>
         </section>
 
-        {/* API quick start */}
-        <section className="py-12">
-          <h2 className="text-3xl font-semibold tracking-tight">
-            For developers
-          </h2>
-          <p className="mt-3 text-zinc-400">
-            REST API. JSON responses. Works with any language. MCP-compatible for AI agents.
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
-              <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-400">
-                Get Intelligence
-              </h3>
-              <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
-                <code>{`curl -H "X-API-Key: your_key" \\
-  "${API_BASE}/synthesis/smart-money-flow"`}</code>
-              </pre>
-            </article>
-            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
-              <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-400">
-                Get Signals (Sentinel)
-              </h3>
-              <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
-                <code>{`curl -H "X-API-Key: your_sentinel_key" \\
-  "${API_BASE}/sentinel/signals"`}</code>
-              </pre>
-            </article>
+        {/* Elevator pitch / CTA */}
+        <section className="py-16">
+          <div className="rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/10 to-blue-500/5 p-8 sm:p-12 text-center">
+            <h2 className="text-3xl font-semibold sm:text-4xl">
+              Developers build before traders buy.
+              <br />
+              <span className="text-cyan-300">We track the builders.</span>
+            </h2>
+            <p className="mt-4 mx-auto max-w-xl text-zinc-400">
+              104 data sources. 25+ assets. Verified accuracy.
+              Start your free trial and see which assets have real developer
+              momentum behind them — before the market catches on.
+            </p>
+            <GALink
+              href={`${API_BASE}/keys/register?plan=sentinel`}
+              className="mt-8 inline-flex rounded-xl bg-white px-8 py-4 text-lg font-semibold text-black transition hover:bg-zinc-200"
+              event="cta_bottom"
+              label="bottom_cta"
+            >
+              Start 7-Day Free Trial — $49.99/mo after
+            </GALink>
           </div>
         </section>
 
-        {/* Links */}
+        {/* For developers */}
         <section className="py-12">
-          <div className="grid gap-4 md:grid-cols-3">
-            <a
-              href="https://github.com/Cyberweasel777/King-Backend"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
-            >
-              <h3 className="font-semibold">GitHub</h3>
-              <p className="mt-1 text-sm text-zinc-400">Open source. Verify the engine.</p>
-            </a>
-            <a
-              href={"/sentinel/track-record"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
-            >
-              <h3 className="font-semibold">Track Record</h3>
-              <p className="mt-1 text-sm text-zinc-400">Live prediction accuracy. Updated daily.</p>
-            </a>
-            <a
-              href="https://aar.botindex.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 transition hover:border-zinc-600"
-            >
-              <h3 className="font-semibold">AAR Trust Layer</h3>
-              <p className="mt-1 text-sm text-zinc-400">Cryptographic receipts for every response.</p>
-            </a>
+          <h2 className="text-2xl font-semibold tracking-tight text-zinc-400">
+            For developers
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
+              <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+                Get ecosystem signals
+              </h3>
+              <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
+                <code>{`curl -H "X-API-Key: YOUR_KEY" \\
+  ${API_BASE}/sentinel/ecosystem-signals`}</code>
+              </pre>
+            </article>
+            <article className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5">
+              <h3 className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+                Get raw ecosystem data
+              </h3>
+              <pre className="mt-4 overflow-x-auto rounded-lg bg-zinc-950 p-4 text-xs text-zinc-200 sm:text-sm">
+                <code>{`curl -H "X-API-Key: YOUR_KEY" \\
+  ${API_BASE}/sentinel/ecosystem`}</code>
+              </pre>
+            </article>
           </div>
         </section>
       </main>
 
       <footer className="border-t border-zinc-800/80 py-8">
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 text-sm text-zinc-400 sm:px-6 lg:px-8">
-          <p>
-            BotIndex — All the intelligence. None of the noise.
-          </p>
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 text-sm text-zinc-500 sm:px-6 lg:px-8">
           <p>BotIndex 2026</p>
+          <div className="flex gap-6">
+            <a
+              href="/sentinel/track-record"
+              className="transition hover:text-zinc-300"
+            >
+              Track Record
+            </a>
+            <a
+              href="https://github.com/Cyberweasel777/King-Backend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-zinc-300"
+            >
+              GitHub
+            </a>
+          </div>
         </div>
       </footer>
     </div>
