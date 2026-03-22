@@ -16,12 +16,17 @@ interface SignalAggregate {
   neutralCount: number;
   narrative: string;
   signals?: Array<{
-    source_type: string;
-    source_name: string;
+    source_type?: string;
+    sourceType?: string;
+    source_name?: string;
+    sourceName?: string;
     direction: string;
-    growth_pct: number;
-    current_value: number;
-    previous_value: number;
+    growth_pct?: number;
+    growthPct?: number;
+    current_value?: number;
+    previous_value?: number;
+    asset?: string;
+    [key: string]: any;
   }>;
 }
 
@@ -181,7 +186,7 @@ function SignalCard({ signal, isPaid }: { signal: SignalAggregate; isPaid: boole
         </div>
       </div>
 
-      {isPaid && signal.signals && signal.signals.length > 0 ? (
+      {isPaid && signal.signals && Array.isArray(signal.signals) && signal.signals.length > 0 ? (
         <>
           <button
             onClick={() => setExpanded(!expanded)}
@@ -200,12 +205,18 @@ function SignalCard({ signal, isPaid }: { signal: SignalAggregate; isPaid: boole
                     }>
                       {s.direction === "bullish" ? "↑" : s.direction === "bearish" ? "↓" : "→"}
                     </span>
-                    <span className="text-zinc-300">{s.source_name}</span>
-                    <span className="text-xs text-zinc-600">({s.source_type})</span>
+                    <span className="text-zinc-300">{s.source_name || s.sourceName || "unknown"}</span>
+                    <span className="text-xs text-zinc-600">({s.source_type || s.sourceType || ""})</span>
                   </div>
-                  <span className={`text-xs font-mono ${s.growth_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                    {s.growth_pct >= 0 ? "+" : ""}{s.growth_pct.toFixed(1)}%
-                  </span>
+                  {s.growth_pct != null ? (
+                    <span className={`text-xs font-mono ${s.growth_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {s.growth_pct >= 0 ? "+" : ""}{Number(s.growth_pct).toFixed(1)}%
+                    </span>
+                  ) : s.growthPct != null ? (
+                    <span className={`text-xs font-mono ${s.growthPct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {s.growthPct >= 0 ? "+" : ""}{Number(s.growthPct).toFixed(1)}%
+                    </span>
+                  ) : null}
                 </div>
               ))}
             </div>
@@ -260,8 +271,18 @@ function Dashboard({ session, user, onLogout }: { session: string; user: Session
       const sigData = await sigRes.json();
       const trData = await trRes.json();
 
-      // The ecosystem-signals endpoint returns { aggregates: [...], individual_signals: [...] | "GATED" }
-      setSignals(sigData.aggregates || []);
+      // Merge individual signals into aggregates by asset
+      const aggregates: SignalAggregate[] = (sigData.aggregates || []).map((agg: SignalAggregate) => {
+        // If aggregates already have signals array, use them
+        if (agg.signals && Array.isArray(agg.signals) && agg.signals.length > 0) return agg;
+        // Otherwise check if there's a top-level individual array and merge
+        if (sigData.individual && Array.isArray(sigData.individual)) {
+          const assetSignals = sigData.individual.filter((s: any) => s.asset === agg.asset);
+          return { ...agg, signals: assetSignals };
+        }
+        return agg;
+      });
+      setSignals(aggregates);
       setTrackRecord(trData);
       setLastRefresh(new Date());
       setError("");
