@@ -119,6 +119,9 @@ export default function Home() {
             <a href="#track-record" className="transition hover:text-white">
               Track Record
             </a>
+            <a href="/sentinel/dashboard" className="transition hover:text-white">
+              Sign In
+            </a>
             <GALink
               href={`${API_BASE}/keys/register?plan=sentinel`}
               className="rounded-md border border-cyan-400/40 bg-cyan-400/10 px-3 py-1.5 text-cyan-300 transition hover:bg-cyan-400/20"
