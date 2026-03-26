@@ -116,9 +116,9 @@ export default function RootLayout({
           style={{ position: 'absolute', opacity: 0 }}
         />
         <Script
+          id="chatwizard-widget"
           src="https://share.aielitesolutions.com/widget.js/?appId=c7c25b37-b183-41d8-b22b-b8075df49493"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
         />
       </body>
     </html>
